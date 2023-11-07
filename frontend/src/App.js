@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
 import { useState } from "react";
 import Home from "./Components/pages/Home";
-import Register from "./Components/pages/Register";
-import Oppointment from "./Components/pages/Oppointment";
+import Appointment from "./Components/pages/appointment";
+import AboutUs from "./Components/pages/AboutUs";
+import Reports from "./Components/pages/Reports";
 
 function App() {
   const [mode, setMode] = useState(false);
@@ -22,8 +22,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home update={handleMode} modeValue={mode} />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/Booking" element={<Oppointment update={handleMode} modeValue={mode}/>} />
+          <Route path="/Booking" element={<Appointment update={handleMode} modeValue={mode} />} />
+          <Route path="/About" element={<AboutUs update={handleMode} modeValue={mode} />}/>
+          <Route path="/Report"  element={<Reports update={handleMode} modeValue={mode} />} />
         </Routes>
       </BrowserRouter>
     </>

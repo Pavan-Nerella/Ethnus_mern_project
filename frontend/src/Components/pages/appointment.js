@@ -4,7 +4,7 @@ import BookingForm from "../BookingForm";
 import BookDoctor from "../BookDoctor";
 
 
-export default function Oppointment(props) {
+export default function appointment(props) {
   return <div>
     <Navigation updateMode={props.update} modeOut={props.modeValue} />
     <BookingForm modeOut={props.modeValue} />
