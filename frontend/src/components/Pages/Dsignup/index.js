@@ -43,7 +43,7 @@ submitForm = (event) =>{
   }
  else if((year2 - year) < 25){
   this.setState({
-    err : " * your age must be greater than 25",
+    err : " * your age must be greater tha 25",
   })
  }
  else{
