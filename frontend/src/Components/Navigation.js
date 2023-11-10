@@ -9,19 +9,17 @@ import {Link} from "react-router-dom";
 
 export default function Navigation(props) {
   return (
-
     <div>
       <Navbar
         expand="lg"
-        bg={props.modeOut ? "dark" : "light"}
-        data-bs-theme={props.modeOut ? "dark" : "light"}
+        bg={props.modeValue ? "dark" : "light"}
+        data-bs-theme={props.modeValue ? "dark" : "light"}
+        sticky="top"
       >
-        <Container>
-          <Navbar.Brand href="#home">Online health care</Navbar.Brand>
+          <Navbar.Brand as={Link} to={'/'} >Online health care</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link as={Link} to={'/'}>Home</Nav.Link>
               <Nav.Link as={Link} to= {'/Booking'} >Book oppointment</Nav.Link>
               <Nav.Link as={Link} to={'/Report'}>Your reports</Nav.Link>
               <Nav.Link as={Link} to={'/About'}>About us</Nav.Link>
@@ -29,20 +27,16 @@ export default function Navigation(props) {
           </Navbar.Collapse>
           <Navbar.Collapse className="justify-content-end">
             <Nav>
-              <Nav.Link href="#link">Login</Nav.Link>
+              <Nav.Link as={Link} to={'/plogin'}>Login</Nav.Link>
               <Nav.Link href="#link">Register</Nav.Link>
               <Form inline>
                 <Button type="submit" onClick={props.updateMode}>
-                  {props.modeOut ? "Light" : "Dark"}
+                  {props.modeValue ? "Light" : "Dark"}
                 </Button>
               </Form>
             </Nav>
           </Navbar.Collapse>
-        </Container>
       </Navbar>
-      <div>
-       
-      </div>
     </div>
   );
 }

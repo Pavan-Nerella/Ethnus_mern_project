@@ -5,10 +5,9 @@ import Home from "./Components/pages/Home";
 import Appointment from "./Components/pages/appointment";
 import AboutUs from "./Components/pages/AboutUs";
 import Reports from "./Components/pages/Reports";
-import Dsignup from "./components/Pages/Dsignup";
-import DloginForm from './components/Pages/DloginForm';
-import PloginForm from './components/Pages/PloginForm';
-import './App.css';
+import Dsignup from "./Components/pages/Dsignup/index";
+import DloginForm from './Components/pages/DloginForm/index';
+import PloginForm from './Components/pages/PloginForm/index';
 
 function App() {
   const [mode, setMode] = useState(false);
@@ -23,19 +22,19 @@ function App() {
     event.preventDefault();
   }
   return (
-    <>
+    <div>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home update={handleMode} modeValue={mode} />} />
           <Route path="/Booking" element={<Appointment update={handleMode} modeValue={mode} />} />
           <Route path="/About" element={<AboutUs update={handleMode} modeValue={mode} />}/>
           <Route path="/Report"  element={<Reports update={handleMode} modeValue={mode} />} />
-          <Route exact path = "/"  component= {DloginForm}/>
-          <Route exact path="/plogin" component={PloginForm}/>
+          <Route exact path = "/dlogin"  component= {DloginForm}/>
+          <Route path="/plogin" element={<PloginForm /> } />
           <Route exact path="/dsignup"  component={Dsignup} />
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
 
   );
 }
