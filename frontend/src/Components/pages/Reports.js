@@ -4,7 +4,7 @@ import Navigation from '../Navigation'
 export default function Reports(props) {
   return (
     <div>
-      <Navigation updateMode={props.update} modeOut={props.modeValue} />
+      <Navigation updateMode={props.update} modeValue={props.modeValue} />
     </div>
   )
 }
