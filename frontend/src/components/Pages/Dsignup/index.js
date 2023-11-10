@@ -21,7 +21,7 @@ state = {
 
 submitForm = (event) =>{
   event.preventDefault()
-  const {password,cpassword,dob,specality,gender,iserr} = this.state;
+  const {password,cpassword,dob,specality,gender} = this.state;
   console.log(this.props)
   const year = new Date(dob).getYear();
   const year2 = new Date().getYear();
@@ -37,7 +37,7 @@ submitForm = (event) =>{
   }
   else if(password !== cpassword){
     this.setState({
-      err : " * password and conform password must be same",
+      err : " * password and confirm password must be same",
     })
 
   }
@@ -97,7 +97,7 @@ render() {
           <input type="password" placeholder="Enter Password" required  onChange={(e) => this.setState({password : e.target.value})}/>
         </div>
         <div className="input-box">
-          <label>Conform Password <span style={{color:"red"}}> *</span></label>
+          <label>Confirm Password <span style={{color:"red"}}> *</span></label>
           <input type="password" placeholder="Enter conform Password" required onChange={(e) => this.setState({cpassword : e.target.value})} />
         </div>
         <label style={{marginBottom:"10px"}}> Specialty <span style={{color:"red"}}> *</span></label>

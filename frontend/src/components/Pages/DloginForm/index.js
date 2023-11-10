@@ -66,7 +66,7 @@ loginSubmit = (event) =>{
 
 storedData = (event) =>{
   const {history} = this.props;
-  const {name,password,err} = this.state;
+  const {name,password} = this.state;
   const obj = {
       name,
       password
