@@ -1,4 +1,6 @@
-import {React,Component,} from "react"
+import {React,Component} from "react"
+
+import { Navigate } from "react-router-dom"
 
 import axios from "axios"
 
@@ -16,12 +18,13 @@ state = {
     number : 123,
     gender : "",
     err : "",
-    iserr: true
+    iserr: true,
+    user : false
 }
 
 submitForm = (event) =>{
   event.preventDefault()
-  const {password,cpassword,dob,specality,gender,iserr} = this.state;
+  const {password,cpassword,dob,specality,gender} = this.state;
   console.log(this.props)
   const year = new Date(dob).getYear();
   const year2 = new Date().getYear();
@@ -37,7 +40,7 @@ submitForm = (event) =>{
   }
   else if(password !== cpassword){
     this.setState({
-      err : " * password and conform password must be same",
+      err : " * password and confirm password must be same",
     })
 
   }
@@ -52,7 +55,7 @@ submitForm = (event) =>{
  
 }
 storedData =  (event) =>{
-  const {history} = this.props;
+ 
     const {name,email,password,specality,gender} = this.state;
     const obj = {
         name,
@@ -66,7 +69,9 @@ const url = "http://localhost:5003/doctors/create-doctor";
   axios.post(url,obj).then((res) =>{
     console.log(res)
     if(res.status === 200){
-        history.replace("/")
+      this.setState({
+        user : true
+      })
     }
     else{
         Promise.reject()
@@ -76,12 +81,20 @@ const url = "http://localhost:5003/doctors/create-doctor";
     alert(err)
    })
 }
+
+// btnClicked = () =>(this.setState({user:true}))
+
 render() {
     console.log(this.props)
-    const {err} = this.state;
+    const {user,err} = this.state;
+    console.log(user)
     return( 
     <div className="main-cont" style={{backgroundImage : "url(../images/doctor_signup_bg2.jpg)"}}>
      <div>
+      {user && (
+          <Navigate to="/dlogin" replace={true} />
+        )}
+
      </div>
     <form onSubmit={this.submitForm} className="form">
         <div className="input-box">
@@ -97,7 +110,7 @@ render() {
           <input type="password" placeholder="Enter Password" required  onChange={(e) => this.setState({password : e.target.value})}/>
         </div>
         <div className="input-box">
-          <label>Conform Password <span style={{color:"red"}}> *</span></label>
+          <label>Confirm Password <span style={{color:"red"}}> *</span></label>
           <input type="password" placeholder="Enter conform Password" required onChange={(e) => this.setState({cpassword : e.target.value})} />
         </div>
         <label style={{marginBottom:"10px"}}> Specialty <span style={{color:"red"}}> *</span></label>
@@ -105,6 +118,7 @@ render() {
             
               <select style={{background : "transparent"}} onChange={(e) => this.setState({specality : e.target.value})} required>
                 <option hidden>Specialty</option>
+                <option>General</option>
                 <option>Gynecologist</option>
                 <option>Dermatologist</option>
                 <option>Cardiologist</option>
@@ -147,4 +161,3 @@ render() {
 }
 
 export default DSignUp
-
