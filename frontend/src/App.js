@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Home from "./Components/pages/Home";
@@ -29,9 +28,9 @@ function App() {
           <Route path="/Booking" element={<Appointment update={handleMode} modeValue={mode} />} />
           <Route path="/About" element={<AboutUs update={handleMode} modeValue={mode} />}/>
           <Route path="/Report"  element={<Reports update={handleMode} modeValue={mode} />} />
-          <Route exact path = "/dlogin"  component= {DloginForm}/>
-          <Route path="/plogin" element={<PloginForm /> } />
-          <Route exact path="/dsignup"  component={Dsignup} />
+          <Route exact path = "/dlogin"  element= {<DloginForm/>} />
+          <Route path="/plogin" element={<PloginForm/>} />
+          <Route path = "/dsignup" element={<Dsignup/>} />
         </Routes>
       </BrowserRouter>
     </div>

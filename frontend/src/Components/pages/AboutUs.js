@@ -5,7 +5,7 @@ export default function AboutUs(props) {
   return (
     <div>
       <Navigation updateMode={props.update} modeValue={props.modeValue} />
-    <p>
+    <p style={{color:props.modeValue?"white":"black",backgroundColor:props.modeValue?"grey":"white"}}>
 Welcome to Health Care!
 
 At Health Care, we believe that everyone deserves access to the best healthcare possible. Our mission is to provide a seamless and efficient platform for patients to connect with healthcare providers, access their medical reports, and manage their bills. We understand that navigating the world of healthcare can be challenging, and we're here to simplify the process for you.
