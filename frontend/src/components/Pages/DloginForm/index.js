@@ -2,6 +2,7 @@ import {Component} from 'react'
 
 import axios from "axios"
 
+import { Navigate } from 'react-router-dom'
 import {Link} from "react-router-dom"
 
 import {TbHandClick} from "react-icons/tb"
@@ -9,11 +10,12 @@ import {TbHandClick} from "react-icons/tb"
 
 import './index.css'
 
-class DloginForm extends Component {
+class Areyoudoctor extends Component {
   state = {
     name : "",
     password : "",
-    err : ""
+    err : "",
+    user : false
   }
 
   renderPasswordField = () => {
@@ -65,7 +67,6 @@ loginSubmit = (event) =>{
 }
 
 storedData = (event) =>{
-  const {history} = this.props;
   const {name,password} = this.state;
   const obj = {
       name,
@@ -76,7 +77,7 @@ storedData = (event) =>{
  axios.post(url,obj).then((res) =>{
   console.log(res)
     if(res.data === "successfull"){
-         history.replace("/home");
+       this.setState({user:true})
     }
     else if(res.data === "nameInCorrect"){
       this.setState({
@@ -94,10 +95,17 @@ storedData = (event) =>{
  })
 }
   render() {
-    const {err} = this.state;
+    console.log(this.props)
+    const {err,user} = this.state;
     return (
-     
+    
+
       <div className="login-form-container">
+          <div>
+         {user && (
+          <Navigate to="/" replace={true} />
+        )}
+         </div>
         <img
           src="../images/logo.png"
           className="login-website-logo-mobile-image"
@@ -108,6 +116,7 @@ storedData = (event) =>{
           className="login-image"
           alt="website login"
         />
+        
         <form className="form-container" onSubmit={this.loginSubmit}>
           <img
             src="../images/logo.png"
@@ -134,4 +143,4 @@ storedData = (event) =>{
   }
 }
 
-export default DloginForm
+export default Areyoudoctor

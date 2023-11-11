@@ -8,6 +8,5 @@ export default function appointment(props) {
   return <div>
     <Navigation updateMode={props.update} modeValue={props.modeValue} />
     <BookingForm modeOut={props.modeValue} />
-    <BookDoctor modeOut={props.modeValue}/> 
   </div>;
 }

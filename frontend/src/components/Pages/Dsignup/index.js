@@ -1,4 +1,6 @@
-import {React,Component,} from "react"
+import {React,Component} from "react"
+
+import { Navigate } from "react-router-dom"
 
 import axios from "axios"
 
@@ -16,7 +18,8 @@ state = {
     number : 123,
     gender : "",
     err : "",
-    iserr: true
+    iserr: true,
+    user : false
 }
 
 submitForm = (event) =>{
@@ -52,7 +55,7 @@ submitForm = (event) =>{
  
 }
 storedData =  (event) =>{
-  const {history} = this.props;
+ 
     const {name,email,password,specality,gender} = this.state;
     const obj = {
         name,
@@ -66,7 +69,9 @@ const url = "http://localhost:5003/doctors/create-doctor";
   axios.post(url,obj).then((res) =>{
     console.log(res)
     if(res.status === 200){
-        history.replace("/")
+      this.setState({
+        user : true
+      })
     }
     else{
         Promise.reject()
@@ -76,12 +81,19 @@ const url = "http://localhost:5003/doctors/create-doctor";
     alert(err)
    })
 }
+
+
 render() {
     console.log(this.props)
-    const {err} = this.state;
+    const {user,err} = this.state;
+    console.log(user)
     return( 
     <div className="main-cont" style={{backgroundImage : "url(../images/doctor_signup_bg2.jpg)"}}>
      <div>
+      {user && (
+          <Navigate to="/dlogin" replace={true} />
+        )}
+
      </div>
     <form onSubmit={this.submitForm} className="form">
         <div className="input-box">
@@ -148,3 +160,4 @@ render() {
 
 export default DSignUp
 
+ 

@@ -16,7 +16,9 @@ export default function Navigation(props) {
         data-bs-theme={props.modeValue ? "dark" : "light"}
         sticky="top"
       >
-          <Navbar.Brand as={Link} to={'/'} >Online health care</Navbar.Brand>
+      <Navbar.Brand as={Link} to={'/'} >
+            <img src = "../images/logo.png" style={{width:"80px",height:"80px",marginLeft:"20px"}}/>
+          </Navbar.Brand> 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
@@ -24,6 +26,7 @@ export default function Navigation(props) {
               <Nav.Link as={Link} to={'/Report'}>Your reports</Nav.Link>
               <Nav.Link as={Link} to={'/About'}>About us</Nav.Link>
             </Nav>
+  
           </Navbar.Collapse>
           <Navbar.Collapse className="justify-content-end">
             <Nav>
@@ -38,5 +41,6 @@ export default function Navigation(props) {
           </Navbar.Collapse>
       </Navbar>
     </div>
-  );
+  );  
+
 }
