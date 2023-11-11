@@ -32,6 +32,7 @@ function App() {
           <Route exact path = "/dlogin"  element= {<DloginForm/>} />
           <Route path="/plogin" element={<PloginForm/>} />
           <Route exact path="/dsignup"  element={<Dsignup/>} />
+
         </Routes>
       </BrowserRouter>
     </div>

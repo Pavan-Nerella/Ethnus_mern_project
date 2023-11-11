@@ -117,6 +117,7 @@ render() {
             
               <select style={{background : "transparent"}} onChange={(e) => this.setState({specality : e.target.value})} required>
                 <option hidden>Specialty</option>
+                <option>General</option>
                 <option>Gynecologist</option>
                 <option>Dermatologist</option>
                 <option>Cardiologist</option>
@@ -160,4 +161,3 @@ render() {
 
 export default DSignUp
 
- 

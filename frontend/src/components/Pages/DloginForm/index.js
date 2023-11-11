@@ -142,5 +142,5 @@ storedData = (event) =>{
     )
   }
 }
-
 export default Areyoudoctor
+

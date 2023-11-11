@@ -31,7 +31,7 @@ export default function Navigation(props) {
           <Navbar.Collapse className="justify-content-end">
             <Nav>
               <Nav.Link as={Link} to={'/plogin'}>Login</Nav.Link>
-              <Nav.Link href="#link">Register</Nav.Link>
+              <Nav.Link as={Link} to={'/dsignup'}>Register</Nav.Link>
               <Form inline>
                 <Button type="submit" onClick={props.updateMode}>
                   {props.modeValue ? "Light" : "Dark"}
