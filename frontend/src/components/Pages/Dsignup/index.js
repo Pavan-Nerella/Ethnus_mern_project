@@ -82,7 +82,6 @@ const url = "http://localhost:5003/doctors/create-doctor";
    })
 }
 
-// btnClicked = () =>(this.setState({user:true}))
 
 render() {
     console.log(this.props)
@@ -161,3 +160,4 @@ render() {
 }
 
 export default DSignUp
+

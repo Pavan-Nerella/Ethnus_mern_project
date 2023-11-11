@@ -10,7 +10,7 @@ import {TbHandClick} from "react-icons/tb"
 
 import './index.css'
 
-class DloginForm extends Component {
+class Areyoudoctor extends Component {
   state = {
     name : "",
     password : "",
@@ -142,5 +142,5 @@ storedData = (event) =>{
     )
   }
 }
+export default Areyoudoctor
 
-export default DloginForm

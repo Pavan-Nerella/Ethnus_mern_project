@@ -5,6 +5,7 @@ import Appointment from "./Components/pages/appointment";
 import AboutUs from "./Components/pages/AboutUs";
 import Reports from "./Components/pages/Reports";
 import Dsignup from "./Components/pages/Dsignup/index";
+
 import DloginForm from './Components/pages/DloginForm/index';
 import PloginForm from './Components/pages/PloginForm/index';
 
@@ -30,7 +31,8 @@ function App() {
           <Route path="/Report"  element={<Reports update={handleMode} modeValue={mode} />} />
           <Route exact path = "/dlogin"  element= {<DloginForm/>} />
           <Route path="/plogin" element={<PloginForm/>} />
-          <Route path = "/dsignup" element={<Dsignup/>} />
+          <Route exact path="/dsignup"  element={<Dsignup/>} />
+
         </Routes>
       </BrowserRouter>
     </div>

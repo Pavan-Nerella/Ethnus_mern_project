@@ -4,19 +4,18 @@ import "./Homestyle.css";
 
 export default function Curosels(props) {
   return (
-    <div>
+    <div style={{background:"transparent",height:"100vh"}}>
       <Carousel
         data-bs-theme={props.modeValue ? "dark" : "light"}
-        className="two"
-        style={{ backgroundColor: props.modeValue ? "grey" : "lightblue" }}
+       style={{ backgroundColor: props.modeValue ? "grey" : "lightblue" }}
       >
-        <Carousel.Item interval={1000} className="img">
+        <Carousel.Item interval={1000} className="img" style={{width:"100%"}}>
           <img
             src="https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1LzM0MC1mZWxpeDEyNzdfMS5qcGc.jpg"
             alt="doctor image"
-            className="image"
+            className="image" 
           ></img>
-          <Carousel.Caption>
+          <Carousel.Caption >
             <h3 className="text">Provide An Exceptional Patient Experience</h3>
           </Carousel.Caption>
         </Carousel.Item>
