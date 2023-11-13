@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const doctorsSchema = require("../schema/doctorsSchema");
+const doctorsSchema = require("../models/doctorsSchema");
 
 router.post("/create-doctor",(req,res,next) =>{
     doctorsSchema.create(req.body)

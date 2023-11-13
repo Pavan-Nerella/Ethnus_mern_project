@@ -8,7 +8,7 @@ export default function AboutUs(props) {
     <p style={{color:props.modeValue?"white":"black",backgroundColor:props.modeValue?"grey":"white"}}>
 Welcome to Health Care!
 
-At Health Care, we believe that everyone deserves access to the best healthcare possible. Our mission is to provide a seamless and efficient platform for patients to connect with healthcare providers, access their medical reports, and manage their bills. We understand that navigating the world of healthcare can be challenging, and we're here to simplify the process for you.
+At <b>Health Care</b>, we believe that everyone deserves access to the best healthcare possible. Our mission is to provide a seamless and efficient platform for patients to connect with healthcare providers, access their medical reports, and manage their bills. We understand that navigating the world of healthcare can be challenging, and we're here to simplify the process for you.
 
 *Our Vision*
 
@@ -16,7 +16,7 @@ Our vision is to revolutionize the way patients interact with healthcare service
 
 *Why Choose Us?*
 
-* *Easy Registration*: We've made registering with [Your Healthcare Management Website Name] a breeze. With just a few clicks, you can create an account and start managing your healthcare journey.
+* *Easy Registration*: We've made registering with <b>Health Care</b> a breeze. With just a few clicks, you can create an account and start managing your healthcare journey.
 
 * *Connect with Trusted Doctors*: Our platform connects you with a network of reputable healthcare providers. You can choose from a range of specialists and primary care physicians based on your needs.
 

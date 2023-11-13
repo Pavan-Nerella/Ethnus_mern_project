@@ -7,6 +7,7 @@ import Reports from "./Components/pages/Reports";
 import Dsignup from "./Components/pages/Dsignup/index";
 import DloginForm from './Components/pages/DloginForm/index';
 import PloginForm from './Components/pages/PloginForm/index';
+import PsignupForm from './Components/pages/PsignupForm/index';
 
 function App() {
   const [mode, setMode] = useState(false);
@@ -30,6 +31,7 @@ function App() {
           <Route path="/Report"  element={<Reports update={handleMode} modeValue={mode} />} />
           <Route exact path = "/dlogin"  element= {<DloginForm/>} />
           <Route path="/plogin" element={<PloginForm/>} />
+          <Route path ="/psignup" element={<PsignupForm />} />
           <Route path = "/dsignup" element={<Dsignup/>} />
         </Routes>
       </BrowserRouter>
