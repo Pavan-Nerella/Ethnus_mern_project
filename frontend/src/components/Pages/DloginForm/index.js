@@ -103,7 +103,7 @@ storedData = (event) =>{
       <div className="login-form-container">
           <div>
          {user && (
-          <Navigate to="/" replace={true} />
+          <Navigate to="/docHome" replace={true} />
         )}
          </div>
         <img
@@ -127,11 +127,9 @@ storedData = (event) =>{
           <div className="input-container">{this.renderPasswordField()}</div>
           <div className='login-button-cont'>
             <Link to = "/dsignup" className="signup-button"> 
-    
-           <p>Sigup </p> 
-            <TbHandClick/>
+              <p>Sigup </p> 
+              <TbHandClick/>
             </Link>
-           
           <button type="submit" className="login-button">
             Login
           </button>

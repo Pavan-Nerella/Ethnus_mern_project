@@ -1,17 +1,37 @@
+import React,{useEffect,useState} from "react";
 import Navigation from "../Navigation";
-import Curosels from "../Curosels";
-import Footer from "../Footer";
-import Areyoudoctor from "../Areyoudoctor";
-import Areyoupatient from "../Areyoupatient";
+import axios from 'axios';
+import {Navigate} from 'react-router-dom';
+
 
 export default function Home(props) {
+  //sending token information and bringing user details.
+  const getUserData = async() =>{
+    try{
+      const response = await axios.post('http://localhost:5003/user/getUserData',{},{
+        headers:{
+          Authorization: "Bearer "+ localStorage.getItem("token"),
+        }
+      })
+      console.log(response.data);
+    }catch(error){
+      console.log(error);
+    }
+  }
+
+  //get user
+ 
+
+  useEffect(() =>{
+    getUserData()
+  },[])
+
+  useEffect(() =>{
+    props.handleData()
+  },[])
   return (
     <div>
-      <Navigation updateMode={props.update} modeValue={props.modeValue}  />
-      <Curosels modeValue={props.modeValue} />
-      <Areyoudoctor/>
-      <Areyoupatient/>
-      <Footer />
+      <Navigation updateMode={props.update} modeValue={props.modeValue}  Data={props.Data}/>
     </div>
   );
 }

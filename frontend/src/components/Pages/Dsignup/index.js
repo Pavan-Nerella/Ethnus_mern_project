@@ -1,7 +1,8 @@
 import {React,Component} from "react"
 
 import { Navigate } from "react-router-dom"
-
+import {Link} from "react-router-dom"
+import {TbHandClick} from "react-icons/tb"
 import axios from "axios"
 
 import "./index.css"
@@ -56,12 +57,14 @@ submitForm = (event) =>{
 }
 storedData =  (event) =>{
  
-    const {name,email,password,specality,gender} = this.state;
+    const {name,email,password,specality,dob,number,gender} = this.state;
     const obj = {
         name,
         email,
         password,
         specality,
+        dob,
+        number,
         gender
     }
    console.log(obj)
@@ -150,8 +153,17 @@ render() {
           <label>Address</label>
           <input type="address" placeholder="Enter street address" />
         </div>
+        <div className='login-button-cont'>
+            <Link to = "/dlogin" className="signup-button"> 
+              <p>Login </p> 
+              <TbHandClick/>
+            </Link>
+          <button type="submit" className="login-button">
+            signup
+          </button>
+          </div>
          <p style={{color:"red"}}>  {err} </p>
-        <button type="submit" >Submit</button>
+        {/* <button type="submit" >Submit</button> */}
       </form>
 
  </div>
