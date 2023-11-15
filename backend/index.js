@@ -20,10 +20,12 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
 
-// app.use("/doctors",doctorRoute)
-// app.use("/patient",doctorRoute)
+
+
 //routes
 app.use('/user',require('./routes/userRoutes'));
+app.use("/doctors",require('./routes/doctorRoutes'))
+// app.use("/patient",doctorRoute)
 
 const port = process.env.PORT || 5003
 //listen port

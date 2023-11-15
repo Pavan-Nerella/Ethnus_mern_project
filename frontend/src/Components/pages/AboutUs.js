@@ -4,7 +4,7 @@ import Navigation from '../Navigation'
 export default function AboutUs(props) {
   return (
     <div>
-      <Navigation updateMode={props.update} modeValue={props.modeValue} />
+      <Navigation updateMode={props.update} modeValue={props.modeValue} Data = {props.Data} />
     <p style={{color:props.modeValue?"white":"black",backgroundColor:props.modeValue?"grey":"white"}}>
 Welcome to Health Care!
 

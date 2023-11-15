@@ -6,9 +6,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export default function BookDoctor(props) {
-  return (
-    <div style={{padding:"25px",backgroundColor:props.modeOut?"grey":"white"}}>
-    <h2 style={{color:props.modeOut?"white":"black"}}>You can Book the doctor on your wish.</h2>
+  const {doctor} = props;
+  return ( 
+  <div style={{padding:"25px",backgroundColor:props.modeOut?"grey":"white"}}>
     <Table bordered hover  striped="columns" variant={props.modeOut?"dark":"light"} >
       <tbody>
         <tr>
@@ -22,16 +22,20 @@ export default function BookDoctor(props) {
           <td>
             <Table hover variant={props.modeOut?"dark":"light"}>
               <tr>
-                <td>Name</td>
-                <td>Pavan</td>
+                <td>Name:</td>
+                <td>{doctor.name}</td>
               </tr>
               <tr>
-                <td>Speciality</td>
-                <td>Cardioligist</td>
+                <td>Speciality:</td>
+                <td>{doctor.specality}</td>
+              </tr>
+              <tr>
+                <td> Contact:</td>
+                <td> {doctor.email}</td>
               </tr>
               <tr>
                 <td colSpan={2}>
-                  <Button type="submit" >Book Now</Button>
+                  <Button type="submit"   style={{marginTop:"20px",backgroundColor:"red",border:"0px",boxShadow:"0px 0px 2px 2px yellow ",color:"white"}}>Book Now</Button>
                 </td>
               </tr>
             </Table>
@@ -40,5 +44,7 @@ export default function BookDoctor(props) {
       </tbody>
     </Table>
     </div>
+
+    
   )
 }

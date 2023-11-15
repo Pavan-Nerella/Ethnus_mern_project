@@ -5,6 +5,8 @@ const doctorsSchema = mongoose.Schema({
     email : {type : String},
     password : {type:String},
     specality : {type : String},
+    dob:{type:String},
+    number:{type:String},
     gender : {type : String},
 },
 {

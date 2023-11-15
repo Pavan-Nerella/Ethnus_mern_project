@@ -1,9 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const doctorsSchema = require("../models/doctorsSchema");
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
-router.post("/create-doctor",(req,res,next) =>{
-    doctorsSchema.create(req.body)
+router.post("/create-doctor",async(req,res,next) =>{
+    const existingUser = await doctorsSchema.findOne({email:req.body.email})
+    if(existingUser){
+        return res.status(200).json({message:'User Already Exists',success:true})
+    }
+    const password = req.body.password
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(password,salt)
+    req.body.password = hashedPassword
+    req.body.cpassword = hashedPassword
+    const newDoc = new doctorsSchema(req.body)
+    await newDoc.save()
     .then(result => {
         res.json(result)
     })
@@ -38,10 +50,6 @@ router.post("/login",(req,res) => {
             }
         }
     )
+   
 })
-
-
-
-
-
 module.exports = router
