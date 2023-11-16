@@ -1,7 +1,6 @@
 import React,{useEffect,useState} from "react";
 import Navigation from "../Navigation";
 import axios from 'axios';
-import {Navigate} from 'react-router-dom';
 
 
 export default function Home(props) {

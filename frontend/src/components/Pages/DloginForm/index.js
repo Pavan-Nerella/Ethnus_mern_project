@@ -12,7 +12,7 @@ import './index.css'
 
 class Areyoudoctor extends Component {
   state = {
-    name : "",
+    email : "",
     password : "",
     err : "",
     user : false
@@ -34,17 +34,17 @@ class Areyoudoctor extends Component {
     )
   }
 
-  renderUsernameField = () => {
+  renderEmailField = () => {
     return (
       <div>
         <label className="input-label" htmlFor="username">
-          USERNAME
+          EMAIL
         </label>
         <input
-          type="text"
+          type="email"
           id="username"
           className="username-input-filed"
-          onChange = {(e) =>(this.setState({name: e.target.value}))}
+          onChange = {(e) =>(this.setState({email: e.target.value}))}
         />
       </div>
     )
@@ -52,10 +52,10 @@ class Areyoudoctor extends Component {
 
 loginSubmit = (event) =>{
   event.preventDefault();
-  const {name,password} = this.state;
-  console.log({name,password})
-  if(name === ""){
-    this.setState({err : " * Please enter the Username"})
+  const {email,password} = this.state;
+  console.log({email,password})
+  if(email === ""){
+    this.setState({err : " * Please enter the Email"})
   }
   else if(password === ""){
     this.setState({err : " * Please enter your Password"})
@@ -67,19 +67,21 @@ loginSubmit = (event) =>{
 }
 
 storedData = (event) =>{
-  const {name,password} = this.state;
+  const {email,password} = this.state;
   const obj = {
-      name,
+      email,
       password
   }
  console.log(obj)
  const url = "http://localhost:5003/doctors/login";
- axios.post(url,obj).then((res) =>{
-  console.log(res)
-    if(res.data === "successfull"){
+ axios.post(url,obj)
+ .then((res) =>{
+  console.log(res.data.token)
+    if(res.data){
+      localStorage.setItem("token",res.data.token);
        this.setState({user:true})
     }
-    else if(res.data === "nameInCorrect"){
+    else if(res.data === "email In Correct"){
       this.setState({
         err : " *Username and Password does not match"
       })
@@ -95,7 +97,7 @@ storedData = (event) =>{
  })
 }
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     const {err,user} = this.state;
     return (
     
@@ -123,7 +125,7 @@ storedData = (event) =>{
             className="login-website-logo-desktop-image"
             alt="website logo"
           />
-           <div className="input-container">{this.renderUsernameField()}</div>
+           <div className="input-container">{this.renderEmailField()}</div>
           <div className="input-container">{this.renderPasswordField()}</div>
           <div className='login-button-cont'>
             <Link to = "/dsignup" className="signup-button"> 

@@ -14,6 +14,8 @@ import {Navigate} from 'react-router-dom';
 import axios from 'axios';
 import LandingPage from "./Components/pages/LandingPage";
 import DoctorHome from "./Components/pages/DoctorHome";
+import ProtectedDocRoutes from "./Components/ProtectedDocRoute";
+import PublicDocRoutes from "./Components/publicDocroute";
 
 function App() {
   //enabling the mode
@@ -29,7 +31,7 @@ function App() {
     event.preventDefault();
   }
 
-  //get user
+  //get user data
   const [data,setData] = useState({fname:"",email:""});
   const getUser = async() =>{
     try{
@@ -56,6 +58,32 @@ function App() {
     }
   }
 
+  //get doctor data
+  const [docdata,setDocData] = useState({name:"",email:""});
+  const getDoc = async() =>{
+    try{
+      const response = await axios.post('http://localhost:5003/doctors/getUserData',
+      {token : localStorage.getItem('token')},
+      {headers:
+        {Authorization: `Bearer ${localStorage.getItem('token')}`}
+      }
+      )
+      console.log(response.data);
+      if(response.data.success){
+        setDocData(
+          { name:response.data.data.name,
+            email: response.data.data.email
+          }
+        )
+      }else{
+        <Navigate to='/dlogin' />
+        localStorage.clear();
+      }
+    }catch(error){
+      console.log(error);
+      localStorage.clear();
+    }
+  }
   return (
     <div>
       <BrowserRouter>
@@ -71,8 +99,6 @@ function App() {
           <Route path="/Booking" element={<Appointment update={handleMode} modeValue={mode} Data={data} />} />
           <Route path="/About" element={<AboutUs update={handleMode} modeValue={mode} Data={data} />}/>
           <Route path="/Report"  element={<Reports update={handleMode} modeValue={mode} Data={data} />} />
-          <Route exact path = "/dlogin"  element= {<DloginForm/>} />
-          <Route path = "/dsignup" element={<Dsignup/>} />
           <Route path="/plogin" element={
             <PublicRoute>
               <PloginForm/>
@@ -83,7 +109,20 @@ function App() {
               <PsignupForm />
             </PublicRoute>
           } />
-          <Route path="/docHome" element={<DoctorHome />} />
+          <Route path = "/dlogin"  element= {
+            <PublicDocRoutes>
+              <DloginForm/>
+          </PublicDocRoutes>
+          } />
+          <Route path = "/dsignup" element={
+            <PublicDocRoutes>
+              <Dsignup/>
+            </PublicDocRoutes>
+          } />
+          
+          <Route path="/docHome" element={
+            <DoctorHome handleData={getDoc} Data={docdata}/>
+          } update={handleMode} modeValue={mode}/>
         </Routes>
       </BrowserRouter>
     </div>
