@@ -126,12 +126,13 @@ storedData = (event) =>{
            <div className="input-container">{this.renderUsernameField()}</div>
           <div className="input-container">{this.renderPasswordField()}</div>
           <div className='login-button-cont'>
+  
             <Link to = "/dsignup" className="signup-button"> 
-    
            <p>Sigup </p> 
             <TbHandClick/>
             </Link>
-           
+
+            
           <button type="submit" className="login-button">
             Login
           </button>
