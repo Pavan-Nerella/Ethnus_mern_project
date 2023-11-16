@@ -3,6 +3,8 @@ const router = express.Router();
 const doctorsSchema = require("../models/doctorsSchema");
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const docAuthMiddleware = require("../middlewares/docAuthMiddleware")
+const {authController } = require('../controllers/docCtrl')
 
 router.post("/create-doctor",async(req,res,next) =>{
     const existingUser = await doctorsSchema.findOne({email:req.body.email})
@@ -35,21 +37,25 @@ router.get("/",(req,res,next) =>{
 
 })
 
-router.post("/login",(req,res) => {
-    const {name,password}= req.body;
-    doctorsSchema.findOne({name: name}).then(
-        (doctor) =>{
-            if(doctor){
-                if(doctor.password === password){
-                    res.json("successfull");
-                }else{
-                    res.json("nameInCorrect");
-                }
-            } else{
-                res.json("No records Found")
-            }
+router.post("/login",async(req,res) => {
+    try{
+        const doctor = await doctorsSchema.findOne({email: req.body.email})
+        if(!doctor){
+            return res.status(200).json({message:`user not found`,success:false})
         }
-    )
-   
+        const isMatch = await bcrypt.compare(req.body.password,doctor.password)
+        if(!isMatch){
+            return res.json("email In Correct");
+        }else{
+            const token = jwt.sign({id:doctor._id},process.env.JWT_DOCTOR_SECRET,{expiresIn:'1d'})
+            res.status(200).json({message:`Login Success`,success:true,token})
+        }
+    }catch(error){
+        console.log(error);
+        res.json("No records Found")
+    }
 })
+
+//Auth || Post
+router.post('/getUserData',docAuthMiddleware,authController)
 module.exports = router
