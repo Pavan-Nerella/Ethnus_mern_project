@@ -1,75 +1,67 @@
-import {Component} from 'react'
+import React,{useState} from 'react'
+import '../../styles/user.css'
+import { Link,useNavigate} from 'react-router-dom'
+import axios from 'axios'
+function Login() {
+  const navigate = useNavigate()
 
-import './index.css'
-
-class PloginForm extends Component {
-  
-  renderPasswordField = () => {
-    return (
-      <>
-        <label className="input-label" htmlFor="password">
-          PASSWORD
-        </label>
-        <input
-          type="password"
-          id="password"
-          className="password-input-filed"
-        />
-      </>
-    )
+  const [login, setLogin] = useState({ email: "", password: "" });
+  function updateLogin(event) {
+    const { name, value } = event.target;
+    setLogin((prevValue) => {
+      return { ...prevValue, [name]: value };
+    });
   }
 
-  renderUsernameField = () => {
-    return (
-      <>
-        <label className="input-label" htmlFor="username">
-          USERNAME
-        </label>
-        <input
-          type="text"
-          id="username"
-          className="username-input-filed"
-        />
-      </>
-    )
-  }
+  //sending data into database
+  let  submitForm = async (event) =>{
+    event.preventDefault();
+    try{
+        const response = await axios.post('http://localhost:5003/user/login',login)
+        if(response.data.success){
+          localStorage.setItem("token",response.data.token);
+          console.log(`${response.data.message}`)
+          {navigate('/userHome')}
 
-  render() {
-    return (
-           <div className="login-form-container">
-   
-        <img
-          src="../images/logo.png"
-          className="login-website-logo-mobile-image"
-          alt="website logo"
-        />
-        <img
-          src="../images/patient_login_image.jpg"
-          className="login-image"
-          alt="website login"
-        />
-        <form className="form-container">
-          <img
-            src="../images/logo.png"
-            className="login-website-logo-desktop-image"
-            alt="website logo"
-          />
-           <div className="input-container">{this.renderUsernameField()}</div>
-          <div className="input-container">{this.renderPasswordField()}</div>
-          <div className='login-button-cont'>
-          <div type="submit" className="signup-button">
-           <p>Sigup Here </p> 
-            <img src ="../images/clickmeicon.png" alt="clickme" className='clickme'/>
-          </div>
-          <div type="submit" className="login-button">
-            Login
-          </div>
-          </div>
-         
-        </form>
-      </div>
+        }else{
+          console.log(`${response.data.message}`)
+        } 
+    }catch(error){
+      console.log(error);
+      console.log("Something went Wrong")
+    }
+  }   
+
+    return(
+        <div className='bg_signin login template d-flex justify-content-center align-items-center vh-100 '>
+            <div className='form_container_signin p-5 rounded '>
+                <form onSubmit={submitForm}>
+                <h3 className='text-center'>Sign in</h3>
+                
+                <div className='mb-2'>
+                    <label htmlFor='email'>Email</label>
+                    <input type='email' placeholder='Enter UserID' className='form-control' value={login.email} onChange={updateLogin} name="email"/>
+                </div>
+
+                <div className='mb-2'>
+                    <label htmlFor='password'>password</label>
+                    <input type='password' placeholder='Enter Password' className='form-control' value={login.password} onChange={updateLogin} name="password"/>
+                </div>
+                <div className='mb-2'>
+                    <input type='checkbox' className='custom-control custom-checkbox' id='check'/>
+                    <label htmlFor='check' className='custom-input-label ms-2'>Remember me</label>
+                </div>
+
+                <div className='d-grid'>
+                    <button className='btn btn-primary'>Sign IN</button>
+                </div>
+
+                <p className='text-end mt-2'>
+                     <a href=''>Forgot Password?</a> <Link to='/psignup' className='ms-2'>Sign Up</Link>
+                </p>
+                  </form>
+            </div>
+        </div>
     )
-  }
 }
-
-export default PloginForm
+export default Login

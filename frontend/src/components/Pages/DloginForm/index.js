@@ -103,7 +103,7 @@ storedData = (event) =>{
       <div className="login-form-container">
           <div>
          {user && (
-          <Navigate to="/" replace={true} />
+          <Navigate to="/docHome" replace={true} />
         )}
          </div>
         <img
@@ -143,5 +143,5 @@ storedData = (event) =>{
     )
   }
 }
-
 export default Areyoudoctor
+
