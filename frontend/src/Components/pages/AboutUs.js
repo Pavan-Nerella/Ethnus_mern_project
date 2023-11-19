@@ -11,7 +11,7 @@ const Aboutus = () => {
     <Fragment>
         {/* <h3 className='contactus'>Having an Issue?<a href='#'>Contact Us</a></h3> */}
         <section className='about'>
-        <h3 className='switch'><Link to={'/feedback'}>Feedback</Link></h3>
+        <h3 className='switch'><Link to={'/fbform'}>Feedback</Link></h3>
             <div className='row'>
             
                 <div className='column'>

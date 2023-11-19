@@ -1,35 +1,22 @@
-import React,{useEffect} from 'react'
+import React,{Component} from 'react'
 import DocNavigation from '../DocNavigation'
+import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 
-function DoctorHome(props) {
+class DoctorHome extends Component {
   //sending token information and bringing user details.
-  const getUserData = async() =>{
-    try{
-      const response = await axios.post('http://localhost:5003/doctors/getUserData',{},{
-        headers:{
-          Authorization: "Bearer "+ localStorage.getItem("token"),
-        }
-      })
-      console.log(response.data);
-    }catch(error){
-      console.log(error);
+  render(){
+      const demail = localStorage.getItem("demail");
+      return (
+        <div>
+          {
+            demail===""&&<Navigate to="/dlogin"/>
+          }
+        <DocNavigation updateMode={this.props.update} modeValue={this.props.modeValue} Data={this.props.Data} islogout={this.islogout}/>
+        </div>
+      )
     }
   }
-
-  useEffect(() =>{
-    getUserData()
-  },[])
-
-  useEffect(() =>{
-    props.handleData()
-  },[])
-  return (
-    <div>
-    <DocNavigation updateMode={props.update} modeValue={props.modeValue} Data={props.Data}/>
-      <p>Doctors Home page</p>
-    </div>
-  )
-}
+ 
 
 export default DoctorHome

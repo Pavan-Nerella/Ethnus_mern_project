@@ -13,7 +13,7 @@ function Doctors() {
   },[])
   return (
     <div>
-      <table class="table">
+      <table class=" table atable">
       <thead>
         <tr>
           <th scope="col">Name</th>

@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+// import './user.css'
 import '../../styles/user.css'
 import { Link,useNavigate} from 'react-router-dom'
 import axios from 'axios'
@@ -7,32 +8,39 @@ function Login() {
   const navigate = useNavigate()
 
   const [login, setLogin] = useState({ email: "", password: "" });
+  const [error,seterr] = useState("");
   function updateLogin(event) {
     const { name, value } = event.target;
     setLogin((prevValue) => {
       return { ...prevValue, [name]: value };
     });
   }
-
   //sending data into database
   let  submitForm = async (event) =>{
     event.preventDefault();
-    try{
+    const {email,password} = login;
+    if(email === "" ){
+      seterr("* Enter your email")
+    }
+    else if(password === ""){
+      seterr("* Enter your password")
+    }
+    else{
+      try{
         const response = await axios.post('http://localhost:5003/user/login',login)
         if(response.data.success){
           localStorage.setItem("token",response.data.token);
-          console.log(`${response.data.message}`)
+          localStorage.setItem("email",login.email)
           {navigate('/userHome')}
-
-        }else{
-          console.log(`${response.data.message}`)
+        }else {
+          seterr(`*${response.data.message}`)
         } 
     }catch(error){
       console.log(error);
       console.log("Something went Wrong")
     }
+    }  
   }   
-
     return(
         <div className='bg_signin login template d-flex justify-content-center align-items-center vh-100 '>
             <div className='form_container_signin p-5 rounded '>
@@ -43,7 +51,6 @@ function Login() {
                     <label htmlFor='email'>Email</label>
                     <input type='email' placeholder='Enter UserID' className='form-control' value={login.email} onChange={updateLogin} name="email"/>
                 </div>
-
                 <div className='mb-2'>
                     <label htmlFor='password'>password</label>
                     <input type='password' placeholder='Enter Password' className='form-control' value={login.password} onChange={updateLogin} name="password"/>
@@ -61,6 +68,7 @@ function Login() {
                      <a href=''>Forgot Password?</a> <Link to='/psignup' className='ms-2'>Sign Up</Link>
                 </p>
                   </form>
+                  <p style={{color :"red"}}> {error}</p>
             </div>
         </div>
     )

@@ -12,7 +12,7 @@
   box-sizing: border-box;
 }
 
-form{
+.form-form{
   /* display: block;
   background-color: white;
   box-shadow: 1px 1px 3px 2px #ddd;
@@ -30,7 +30,7 @@ form{
     padding: 40px 35px 55px;
     margin: 120px auto;  
 }
-form input, textarea{
+.form-form input, textarea{
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -42,11 +42,11 @@ form input, textarea{
   color: #100606;
 }
 
-form span{
+.form-form span{
   color: rgb(0, 179, 255);
 }
 
-form button{
+.form-form button{
   height: 30px;
   width: 100%;
   align-items: center;

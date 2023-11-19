@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import Home from "./Components/pages/Home";
 import Appointment from "./Components/pages/appointment";
 import AboutUs from "./Components/pages/AboutUs";
@@ -9,7 +9,9 @@ import DloginForm from './Components/pages/DloginForm/index';
 import PloginForm from './Components/pages/PloginForm/index';
 import PsignupForm from './Components/pages/PsignupForm/index';
 import {Navigate} from 'react-router-dom';
+import Approvedapt from "./Components/pages/Approvedapt";
 import axios from 'axios';
+import Pappointment from "./Components/pages/Pappointement";
 import LandingPage from "./Components/pages/LandingPage";
 import ProtectedRoutes from "./Components/ProtectedRoutes";
 import PublicRoute from "./Components/PublicRoute";
@@ -22,8 +24,13 @@ import AdminHome from "./Components/admin/HomeAdmin";
 import Alldoctors from "./Components/admin/Doctors"
 import AdminPR from "./Components/admin/PublicRouteAdmin"
 import AdminProtR from "./Components/admin/ProtectedadminRoute";
+import Doctoruser from "./Components/pages/Doctoruser";
+import ProtectedDocRoute from "./Components/ProtectedDocRoute";
+import PublicDocRoutes from "./Components/publicDocroute";
+
 function App() {
-  //enabling the mode
+  const token = localStorage.getItem("token");
+  console.log(token)
   const [mode, setMode] = useState(false);
   function handleMode(event) {
     setMode((prevValue) => {
@@ -35,9 +42,8 @@ function App() {
     });
     event.preventDefault();
   }
-
   //get user data
-  const [data,setData] = useState({fname:"",email:""});
+  const [data,setData] = useState({fname:"",email:"",});
   const getUser = async() =>{
     try{
       const response = await axios.post('http://localhost:5003/user/getUserData',
@@ -50,7 +56,7 @@ function App() {
       if(response.data.success){
         setData(
           { fname:response.data.data.fname,
-            email: response.data.data.email
+            email: response.data.data.email,
           }
         )
       }else{
@@ -88,7 +94,8 @@ function App() {
       console.log(error);
       localStorage.clear();
     }
-  }
+  } 
+  
   return (
     <div>
       <BrowserRouter>
@@ -102,6 +109,7 @@ function App() {
             </ProtectedRoutes>
           } />
           <Route path="/Booking" element={<Appointment update={handleMode} modeValue={mode} Data={data} />} />
+          <Route path="/pappointtment" element={<Pappointment update={handleMode} modeValue={mode} Data={data} />} />
           <Route path="/About" element={<AboutUs update={handleMode} modeValue={mode} Data={data} />}/>
           <Route path="/Report"  element={<Reports update={handleMode} modeValue={mode} Data={data} />} />
           <Route path="/plogin" element={
@@ -115,16 +123,19 @@ function App() {
             </PublicRoute>
           } />
           <Route path = "/dlogin"  element= {
+            <PublicDocRoutes>
               <DloginForm/>
+            </PublicDocRoutes>
+             
           } />
           <Route path = "/dsignup" element={
               <Dsignup/>
           } />
           
           <Route path="/docHome" element={
-            <ProtectedRoutes>
+            <ProtectedDocRoute>
             <DoctorHome handleData={getDoc} Data={docdata}/>
-            </ProtectedRoutes>
+            </ProtectedDocRoute>
           } update={handleMode} modeValue={mode}/>
           <Route path="/alogin" element={
             <AdminPR>
@@ -150,6 +161,24 @@ function App() {
           } />
 
 
+          <Route path="/docHome" element={ 
+                <ProtectedDocRoute>
+                  <DoctorHome handleData={getDoc} Data={docdata} update={handleMode} modeValue={mode}/>
+                </ProtectedDocRoute>
+               
+          } />
+            <Route path="/doctoruser" element={ 
+              <ProtectedDocRoute>
+                <Doctoruser handleData={getDoc} Data={docdata} update={handleMode} modeValue={mode}/>
+              </ProtectedDocRoute>
+             
+          } />
+            <Route path="/approved" element={ 
+              <ProtectedDocRoute>
+                <Approvedapt handleData={getDoc} Data={docdata} update={handleMode} modeValue={mode}/>
+              </ProtectedDocRoute>
+             
+          } />
         </Routes>
       </BrowserRouter>
     </div>

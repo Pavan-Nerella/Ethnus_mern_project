@@ -30,7 +30,7 @@ const Form = () => {
   }
   return (
     <div className='form'>
-    <form onSubmit={submitFeedback}>
+    <form className='form-form' onSubmit={submitFeedback}>
         <h1>ContactUs<span>  Here!</span></h1>
         <input type='text' name='name' id=''placeholder='Enter Name' value={feedback.name} onChange={updateFeedback}/>
         <input type='email' name='email' id=''placeholder='example@gmail.com' value={feedback.email} onChange={updateFeedback}/>

@@ -10,7 +10,6 @@ export default function Navigation(props) {
   const handleLogout = () =>{
     localStorage.clear();
   }
-  // const admin = localStorage.getItem("admin");
   return (
     <div>
       <Navbar

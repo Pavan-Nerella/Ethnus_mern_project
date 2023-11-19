@@ -12,7 +12,7 @@ function Review() {
    },[])
   return (
     <div>
-      <table class="table">
+      <table class="table atable">
       <thead>
         <tr>
           <th scope="col">First Name</th>
