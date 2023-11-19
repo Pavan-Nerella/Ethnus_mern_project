@@ -50,58 +50,66 @@ class Areyoudoctor extends Component {
     )
   }
 
-loginSubmit = (event) =>{
+loginSubmit =  (event) =>{
   event.preventDefault();
-  const {email,password} = this.state;
-  console.log({email,password})
-  if(email === ""){
-    this.setState({err : " * Please enter the Email"})
+
+  this.getApi()
+  } 
+  getApi = async () => {
+    const {email,password} = this.state;
+    const url = "http://localhost:5003/doctors/login";
+  let err = ""
+  const obj = {
+    email,
+    password
+}
+  if(email === "" ){
+    err ="* Enter your email"
+    this.setState({
+      err
+    }
+    )
   }
   else if(password === ""){
-    this.setState({err : " * Please enter your Password"})
+    err="* Enter your password"
+    this.setState({
+      err
+    }
+    )
   }
   else{
-      this.storedData()
+    axios
+    .post(url, obj)
+    .then((res) => {
+      console.log(res.data === "Password incorrect")
+      if(res.data === "login successfull"){
+        localStorage.setItem("demail",email)
+        this.setState({
+          user : true
+        })
+      } 
+      else if(res.data === "Password incorrect"){
+        this.setState({
+          err : "* Password incorrect"
+        })
+      }
+      else if(res.data === "No record exits"){
+       this.setState({
+        err : "* No records found"
+       })
+      }    
+    })
+    .catch((err) => {
+      alert(err);
+    });
   }
 
-}
 
-storedData = (event) =>{
-  const {email,password} = this.state;
-  const obj = {
-      email,
-      password
-  }
- console.log(obj)
- const url = "http://localhost:5003/doctors/login";
- axios.post(url,obj)
- .then((res) =>{
-  console.log(res.data.token)
-    if(res.data){
-      localStorage.setItem("token",res.data.token);
-       this.setState({user:true})
-    }
-    else if(res.data === "email In Correct"){
-      this.setState({
-        err : " *Username and Password does not match"
-      })
-    }
-    else{
-      this.setState({
-        err : "* No records there"
-      })
-    }
- })
- .catch((err) =>{
-  alert(err)
- })
 }
-  render() {
+  render(){
     // console.log(this.props)
     const {err,user} = this.state;
     return (
-    
-
       <div className="login-form-container">
           <div>
          {user && (
@@ -118,7 +126,6 @@ storedData = (event) =>{
           className="login-image"
           alt="website login"
         />
-        
         <form className="form-container" onSubmit={this.loginSubmit}>
           <img
             src="../images/logo.png"
@@ -129,9 +136,9 @@ storedData = (event) =>{
           <div className="input-container">{this.renderPasswordField()}</div>
           <div className='login-button-cont'>
             <Link to = "/dsignup" className="signup-button"> 
-              <p>Sigup </p> 
-              <TbHandClick/>
-            </Link>
+           <p>Sigup </p> 
+            <TbHandClick/>
+            </Link>      
           <button type="submit" className="login-button">
             Login
           </button>

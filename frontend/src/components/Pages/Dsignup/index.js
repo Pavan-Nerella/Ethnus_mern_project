@@ -121,12 +121,18 @@ render() {
               <select style={{background : "transparent"}} onChange={(e) => this.setState({specality : e.target.value})} required>
                 <option hidden>Specialty</option>
                 <option>General</option>
+                
                 <option>Gynecologist</option>
                 <option>Dermatologist</option>
                 <option>Cardiologist</option>
                 <option>Endocrinologis</option>
+                <option> Gastroenterology	</option>
                 <option>  Neurologist</option>
+               <option> Orthopedics</option>
                  <option> Psychiatrist</option>
+                 <option> Pulmonology</option>
+                 <option> Ophthalmology</option>
+                 <option> Otolaryngology</option>
                  <option> Others</option>
                </select>
           </div>

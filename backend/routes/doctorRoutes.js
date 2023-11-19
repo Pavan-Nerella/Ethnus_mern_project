@@ -37,24 +37,20 @@ router.get("/",(req,res,next) =>{
 
 })
 
-router.post("/login",async(req,res) => {
-    try{
-        const doctor = await doctorsSchema.findOne({email: req.body.email})
-        if(!doctor){
-            return res.status(200).json({message:`user not found`,success:false})
+router.post("/login", (req, res) => {
+    const {  email, password } = req.body;
+    doctorsSchema.findOne({ email: email }).then((doctor) => {
+      if (doctor) {
+        if (doctor.password === password) {
+          res.json("login successfull");
+        } else {
+          res.json("Password incorrect");
         }
-        const isMatch = await bcrypt.compare(req.body.password,doctor.password)
-        if(!isMatch){
-            return res.json("email In Correct");
-        }else{
-            const token = jwt.sign({id:doctor._id},process.env.JWT_DOCTOR_SECRET,{expiresIn:'1d'})
-            res.status(200).json({message:`Login Success`,success:true,token})
-        }
-    }catch(error){
-        console.log(error);
-        res.json("No records Found")
-    }
-})
+      } else {
+        res.json("No record exits");
+      }
+    });
+  });
 
 //Auth || Post
 router.post('/getUserData',docAuthMiddleware,authController)

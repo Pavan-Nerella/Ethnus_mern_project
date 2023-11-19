@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 
 function DocNavigation(props) {
     const handleLogout = () =>{
-        localStorage.clear()
+        localStorage.clear();
     }
   return (
     <div>
@@ -23,17 +23,16 @@ function DocNavigation(props) {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link as={Link} to= {'/Booking'} >Doctors</Nav.Link>
-              <Nav.Link as={Link} to={'/Report'}>Users</Nav.Link>
-              <Nav.Link as={Link} to={'/About'}>Profile</Nav.Link>
+              <Nav.Link as={Link} to={'/doctoruser'}>Pending appointments</Nav.Link>
+              <Nav.Link as={Link} to={'/approved'}>Approved appointments</Nav.Link>
+              <Nav.Link as={Link} >Profile</Nav.Link>
             </Nav>
-  
           </Navbar.Collapse>
           <Navbar.Collapse className="justify-content-end">
             <Nav>
               <Nav.Link ><i class="fa-solid fa-bell"></i></Nav.Link>
-              <Nav.Link as={Link} to={'/userProfile'}><i class="fa-solid fa-user"></i> </Nav.Link>
-              <Nav.Link as={Link} to={'/plogin'} onClick={handleLogout}>Logout</Nav.Link>
+              <Nav.Link as={Link} to={'/dapointment'}><i class="fa-solid fa-user"></i> </Nav.Link>
+              <Nav.Link as={Link} to={'/dlogin'} onClick={handleLogout}>Logout</Nav.Link>
               <Form inline>
                 <Button type="submit" onClick={props.updateMode}>
                   {props.modeValue ? "Light" : "Dark"}
