@@ -1,10 +1,7 @@
 import React,{useEffect,useState} from "react";
 import Navigation from "../Navigation";
-import axios from "axios"
-import Curosels from "../Curosels";
-import Footer from "../Footer";
-import Areyoudoctor from "../pages/Areyoudoctor";
-import Areyoupatient  from "../pages/Areyoupatient";
+import axios from 'axios';
+
 export default function Home(props) {
   //sending token information and bringing user details.
   const getUserData = async() =>{

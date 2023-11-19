@@ -1,10 +1,10 @@
 import React from "react";
 import Navigation from "../Navigation";
-import BookingForm from "../BookingForm";
+import Pmainapoint from "./Pmainapoint";
 
-export default function appointment(props) {
+export default function Pappointment(props) {
   return <div>
     <Navigation updateMode={props.update} modeValue={props.modeValue} Data = {props.Data} />
-    <BookingForm modeOut={props.modeValue} Data = {props.Data} />
+   <Pmainapoint/>
   </div>;
 }

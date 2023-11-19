@@ -12,7 +12,7 @@ import './index.css'
 
 class Areyoudoctor extends Component {
   state = {
-    name : "",
+    email : "",
     password : "",
     err : "",
     user : false
@@ -34,72 +34,82 @@ class Areyoudoctor extends Component {
     )
   }
 
-  renderUsernameField = () => {
+  renderEmailField = () => {
     return (
       <div>
         <label className="input-label" htmlFor="username">
-          USERNAME
+          EMAIL
         </label>
         <input
-          type="text"
+          type="email"
           id="username"
           className="username-input-filed"
-          onChange = {(e) =>(this.setState({name: e.target.value}))}
+          onChange = {(e) =>(this.setState({email: e.target.value}))}
         />
       </div>
     )
   }
 
-loginSubmit = (event) =>{
+loginSubmit =  (event) =>{
   event.preventDefault();
-  const {name,password} = this.state;
-  console.log({name,password})
-  if(name === ""){
-    this.setState({err : " * Please enter the Username"})
+
+  this.getApi()
+  } 
+  getApi = async () => {
+    const {email,password} = this.state;
+    const url = "http://localhost:5003/doctors/login";
+  let err = ""
+  const obj = {
+    email,
+    password
+}
+  if(email === "" ){
+    err ="* Enter your email"
+    this.setState({
+      err
+    }
+    )
   }
   else if(password === ""){
-    this.setState({err : " * Please enter your Password"})
+    err="* Enter your password"
+    this.setState({
+      err
+    }
+    )
   }
   else{
-      this.storedData()
+    axios
+    .post(url, obj)
+    .then((res) => {
+      console.log(res.data === "Password incorrect")
+      if(res.data === "login successfull"){
+        localStorage.setItem("demail",email)
+        this.setState({
+          user : true
+        })
+      } 
+      else if(res.data === "Password incorrect"){
+        this.setState({
+          err : "* Password incorrect"
+        })
+      }
+      else if(res.data === "No record exits"){
+       this.setState({
+        err : "* No records found"
+       })
+      }    
+    })
+    .catch((err) => {
+      alert(err);
+    });
   }
 
-}
 
-storedData = (event) =>{
-  const {name,password} = this.state;
-  const obj = {
-      name,
-      password
-  }
- console.log(obj)
- const url = "http://localhost:5003/doctors/login";
- axios.post(url,obj).then((res) =>{
-  console.log(res)
-    if(res.data === "successfull"){
-       this.setState({user:true})
-    }
-    else if(res.data === "nameInCorrect"){
-      this.setState({
-        err : " *Username and Password does not match"
-      })
-    }
-    else{
-      this.setState({
-        err : "* No records there"
-      })
-    }
- })
- .catch((err) =>{
-  alert(err)
- })
 }
-  render() {
-    console.log(this.props)
+  render(){
+    // console.log(this.props)
     const {err,user} = this.state;
     return (
-    
-
       <div className="login-form-container">
           <div>
          {user && (
@@ -116,23 +126,19 @@ storedData = (event) =>{
           className="login-image"
           alt="website login"
         />
-        
         <form className="form-container" onSubmit={this.loginSubmit}>
           <img
             src="../images/logo.png"
             className="login-website-logo-desktop-image"
             alt="website logo"
           />
-           <div className="input-container">{this.renderUsernameField()}</div>
+           <div className="input-container">{this.renderEmailField()}</div>
           <div className="input-container">{this.renderPasswordField()}</div>
           <div className='login-button-cont'>
-  
             <Link to = "/dsignup" className="signup-button"> 
            <p>Sigup </p> 
             <TbHandClick/>
-            </Link>
-
-            
+            </Link>      
           <button type="submit" className="login-button">
             Login
           </button>
