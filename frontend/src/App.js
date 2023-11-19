@@ -8,15 +8,20 @@ import Dsignup from "./Components/pages/Dsignup/index";
 import DloginForm from './Components/pages/DloginForm/index';
 import PloginForm from './Components/pages/PloginForm/index';
 import PsignupForm from './Components/pages/PsignupForm/index';
-import ProtectedRoutes from "./Components/ProtectedRoutes";
-import PublicRoute from "./Components/PublicRoute";
 import {Navigate} from 'react-router-dom';
 import axios from 'axios';
 import LandingPage from "./Components/pages/LandingPage";
+import ProtectedRoutes from "./Components/ProtectedRoutes";
+import PublicRoute from "./Components/PublicRoute";
 import DoctorHome from "./Components/pages/DoctorHome";
-import ProtectedDocRoutes from "./Components/ProtectedDocRoute";
-import PublicDocRoutes from "./Components/publicDocroute";
-
+import Contactus from './Components/pages/contactus'
+import Allusers from "./Components/admin/Users";
+import Review from "./Components/admin/Review";
+import AdminLogin from "./Components/admin/Login";
+import AdminHome from "./Components/admin/HomeAdmin";
+import Alldoctors from "./Components/admin/Doctors"
+import AdminPR from "./Components/admin/PublicRouteAdmin"
+import AdminProtR from "./Components/admin/ProtectedadminRoute";
 function App() {
   //enabling the mode
   const [mode, setMode] = useState(false);
@@ -71,7 +76,7 @@ function App() {
       console.log(response.data);
       if(response.data.success){
         setDocData(
-          { name:response.data.data.name,
+          { name:response.data.data.fname,
             email: response.data.data.email
           }
         )
@@ -110,19 +115,41 @@ function App() {
             </PublicRoute>
           } />
           <Route path = "/dlogin"  element= {
-            <PublicDocRoutes>
               <DloginForm/>
-          </PublicDocRoutes>
           } />
           <Route path = "/dsignup" element={
-            <PublicDocRoutes>
               <Dsignup/>
-            </PublicDocRoutes>
           } />
           
           <Route path="/docHome" element={
+            <ProtectedRoutes>
             <DoctorHome handleData={getDoc} Data={docdata}/>
+            </ProtectedRoutes>
           } update={handleMode} modeValue={mode}/>
+          <Route path="/alogin" element={
+            <AdminPR>
+            <AdminLogin />
+            </AdminPR>
+          } />
+          <Route path="/adminHome" element={
+            <AdminProtR>
+            <AdminHome />
+            </AdminProtR>
+          }/>
+          <Route path="/fbform" element={
+            <Contactus />
+          } />
+          <Route path="/allusers" element={
+            <Allusers />
+          } />
+          <Route path="/alldoctors" element={
+            <Alldoctors/>
+          } />
+          <Route path="/feedback" element={
+            < Review/>
+          } />
+
+
         </Routes>
       </BrowserRouter>
     </div>

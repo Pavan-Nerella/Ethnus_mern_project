@@ -1,0 +1,25 @@
+/* Add this styling to your CSS file or in-line style */
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px;
+  }
+  
+  .table th {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+  }
+  
+.table td:hover {
+    background-color:coral;
+    color:white;
+  }
+  
+  /* You can add more styling based on your design preferences */
+  

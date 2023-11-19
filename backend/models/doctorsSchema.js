@@ -8,6 +8,7 @@ const doctorsSchema = mongoose.Schema({
     dob:{type:String},
     number:{type:String},
     gender : {type : String},
+    image:{type:String}
 },
 {
     collection: "Doctors",

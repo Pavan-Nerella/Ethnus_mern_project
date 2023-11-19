@@ -3,8 +3,9 @@ const router = express.Router();
 const doctorsSchema = require("../models/doctorsSchema");
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const docAuthMiddleware = require("../middlewares/docAuthMiddleware")
+const authMiddleware = require("../middlewares/authMiddleware")
 const {authController } = require('../controllers/docCtrl')
+
 
 router.post("/create-doctor",async(req,res,next) =>{
     const existingUser = await doctorsSchema.findOne({email:req.body.email})
@@ -47,7 +48,7 @@ router.post("/login",async(req,res) => {
         if(!isMatch){
             return res.json("email In Correct");
         }else{
-            const token = jwt.sign({id:doctor._id},process.env.JWT_DOCTOR_SECRET,{expiresIn:'1d'})
+            const token = jwt.sign({id:doctor._id},process.env.JWT_SECRET,{expiresIn:'1d'})
             res.status(200).json({message:`Login Success`,success:true,token})
         }
     }catch(error){
@@ -57,5 +58,5 @@ router.post("/login",async(req,res) => {
 })
 
 //Auth || Post
-router.post('/getUserData',docAuthMiddleware,authController)
+router.post('/getUserData',authMiddleware,authController)
 module.exports = router

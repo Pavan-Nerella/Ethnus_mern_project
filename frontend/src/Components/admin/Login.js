@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
-import '../../styles/user.css'
-import { Link,useNavigate} from 'react-router-dom'
+import '../styles/user.css'
+import { useNavigate} from 'react-router-dom'
 import axios from 'axios'
 
 function Login() {
@@ -18,11 +18,15 @@ function Login() {
   let  submitForm = async (event) =>{
     event.preventDefault();
     try{
-        const response = await axios.post('http://localhost:5003/user/login',login)
+        const response = await axios.post('http://localhost:5003/admin/login',login)
+        console.log(response.data)
         if(response.data.success){
-          localStorage.setItem("token",response.data.token);
+          // const admin = {email:response.data.data.email,name:response.data.data.name}
+          // localStorage.setItem("admin",admin)
+          localStorage.setItem("adminemail",response.data.data.email)
+          localStorage.setItem("adminname",response.data.data.name)
           console.log(`${response.data.message}`)
-          {navigate('/userHome')}
+          {navigate('/adminHome')}
 
         }else{
           console.log(`${response.data.message}`)
@@ -58,7 +62,7 @@ function Login() {
                 </div>
 
                 <p className='text-end mt-2'>
-                     <a href=''>Forgot Password?</a> <Link to='/psignup' className='ms-2'>Sign Up</Link>
+                     <a href=''>Forgot Password?</a> 
                 </p>
                   </form>
             </div>

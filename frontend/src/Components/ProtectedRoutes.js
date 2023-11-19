@@ -5,7 +5,7 @@ function ProtectedRoutes({children}) {
   if(localStorage.getItem("token")){
     return children
   }else{
-    return <Navigate to="/plogin" />
+    return <Navigate to="/" />
   }
 }
 

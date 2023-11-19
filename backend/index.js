@@ -5,6 +5,8 @@ const morgan = require('morgan')
 const dotenv = require('dotenv')
 const cors = require("cors") 
 const connectDB = require("./config/db");
+// const multer = require('multer');
+// const upload = multer({ dest: 'uploads/' });
 
 //dotenv config
 dotenv.config();
@@ -24,8 +26,8 @@ app.use(cors())
 
 //routes
 app.use('/user',require('./routes/userRoutes'));
-app.use("/doctors",require('./routes/doctorRoutes'))
-// app.use("/patient",doctorRoute)
+app.use("/doctors",require('./routes/doctorRoutes'));
+app.use("/admin",require('./routes/adminRoutes'));
 
 const port = process.env.PORT || 5003
 //listen port

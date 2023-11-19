@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
 
-function PublicRoute({children}) {
+function PublicDocRoute({children}) {
     if(localStorage.getItem("token")){
         return <Navigate to="/docHome" />
     }else{
@@ -9,4 +9,4 @@ function PublicRoute({children}) {
     }
 }
 
-export default PublicRoute
+export default PublicDocRoute
