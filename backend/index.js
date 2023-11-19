@@ -18,6 +18,8 @@ app.use(cors())
 
 //routes
 app.use('/user',require('./routes/userRoutes'));
+app.use("/doctors",require('./routes/doctorRoutes'));
+app.use("/admin",require('./routes/adminRoutes'));
 app.use("/doctors",require('./routes/doctorRoutes'))
 app.use("/book",require('./routes/doctorbookedRoutes'))
 // app.use("/patient",doctorRoute)

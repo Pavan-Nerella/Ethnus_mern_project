@@ -18,14 +18,26 @@ state = {
     dob: new Date(),
     number : 123,
     gender : "",
+    image:"",
     err : "",
     iserr: true,
     user : false
 }
-
+converToBase64 = (event) =>{
+  console.log(event);
+  var reader = new FileReader();
+  reader.readAsDataURL(event.target.files[0]);
+  reader.onload = ()=>{
+    console.log(reader.result);
+    this.setState({image:reader.result})
+  }
+  reader.onerror = error =>{
+    console.log("Error: ",error);
+  }
+}
 submitForm = (event) =>{
   event.preventDefault()
-  const {password,cpassword,dob,specality,gender} = this.state;
+  const {password,cpassword,dob,specality,gender,image} = this.state;
   console.log(this.props)
   const year = new Date(dob).getYear();
   const year2 = new Date().getYear();
@@ -49,15 +61,18 @@ submitForm = (event) =>{
   this.setState({
     err : " * your age must be greater tha 25",
   })
- }
- else{
+ }else if(image == ""){
+  this.setState({
+    err:"*must and should upload the image",
+  })
+ }else{
      this.storedData()
  }
  
 }
 storedData =  (event) =>{
  
-    const {name,email,password,specality,dob,number,gender} = this.state;
+    const {name,email,password,specality,dob,number,gender,image} = this.state;
     const obj = {
         name,
         email,
@@ -65,11 +80,17 @@ storedData =  (event) =>{
         specality,
         dob,
         number,
-        gender
+        gender,
+        image
     }
    console.log(obj)
 const url = "http://localhost:5003/doctors/create-doctor";
-  axios.post(url,obj).then((res) =>{
+  axios.post(url,obj,{headers:
+    {"Content-Type":"application/json",
+    Accept:"application/json",
+    "Acccess-Control-Allow-Origin":"*",
+  }
+}).then((res) =>{
     console.log(res)
     if(res.status === 200){
       this.setState({
@@ -154,6 +175,10 @@ render() {
               <option> Female</option>
               <option> Others</option>
              </select>
+        </div>
+        <div className="input-box">
+          <label >upload Image<span style={{color:"red"}}> *</span></label>
+          <input type="file" accept="image/*" onChange={this.converToBase64} required></input>
         </div>
         <div className="input-box address">
           <label>Address</label>
