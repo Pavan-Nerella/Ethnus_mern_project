@@ -53,6 +53,23 @@ router.post("/login", (req, res) => {
     });
   });
 
+
+
 //Auth || Post
 router.post('/getUserData',authMiddleware,authController)
+
+router.delete("/delete-doctor/:id",async (req, res, next) => {
+  const doctorId = req.params.id;
+  console.log(doctorId)
+  try {
+      const deletedDoctorBooked = await doctorsSchema.findByIdAndDelete(doctorId);
+      if (!deletedDoctorBooked) {
+        return res.status(404).json({ message: 'DoctorBooked not found' });
+      }
+      res.status(204).end(); // No content for successful deletion
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+});
 module.exports = router

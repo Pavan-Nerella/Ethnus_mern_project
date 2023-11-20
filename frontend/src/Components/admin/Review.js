@@ -14,6 +14,7 @@ function Review(props) {
   return (
     <div>
     <AdminNav updateMode={props.update} modeValue={props.modeValue}  Data={props.Data}/>
+    <div className="table-body">
       <table class="table atable">
       <thead>
         <tr>
@@ -36,6 +37,7 @@ function Review(props) {
         }
       </tbody>
     </table>
+    </div>
     </div>
   )
 }

@@ -3,6 +3,7 @@ import Navigation from "../Navigation";
 import axios from 'axios';
 import './Body.css'
 import Footer from '../Footer'
+import FAQ from '../FAQ/faqhome'
 
 export default function Home(props) {
   //sending token information and bringing user details.
@@ -42,6 +43,7 @@ export default function Home(props) {
         <img src ="/images/pathome.jpg" alt ="my_imag" height="100%" width="200px"/>
         </div>
     </div>
+    <FAQ />
     <Footer />
     </div>
   );

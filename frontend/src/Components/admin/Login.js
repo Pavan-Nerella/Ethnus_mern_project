@@ -8,6 +8,7 @@ function Login() {
   const navigate = useNavigate()
 
   const [login, setLogin] = useState({ email: "", password: "" });
+  const[showp,setshowp] = useState(false);
   function updateLogin(event) {
     const { name, value } = event.target;
     setLogin((prevValue) => {
@@ -37,9 +38,8 @@ function Login() {
       console.log("Something went Wrong")
     }
   }   
-
     return(
-        <div className='bg_signin login template d-flex justify-content-center align-items-center vh-100 '>
+        <div className=' login template d-flex justify-content-center align-items-center vh-100 ' style={{backgroundImage:"url(./images/bg.jpg)",backgroundPosition:"center",backgroundSize:"cover"}}>
             <div className='form_container_signin p-5 rounded '>
                 <form onSubmit={submitForm}>
                 <h3 className='text-center'>Sign in</h3>
@@ -51,20 +51,20 @@ function Login() {
 
                 <div className='mb-2'>
                     <label htmlFor='password'>password</label>
-                    <input type='password' placeholder='Enter Password' className='form-control' value={login.password} onChange={updateLogin} name="password"/>
+                    {
+                      showp ?  <input type='text' placeholder='Enter Password' className='form-control' value={login.password} onChange={updateLogin} name="password"/> :
+                      <input type='password' placeholder='Enter Password' className='form-control' value={login.password} onChange={updateLogin} name="password"/>
+                    }
+                    
                 </div>
                 <div className='mb-2'>
-                    <input type='checkbox' className='custom-control custom-checkbox' id='check'/>
-                    <label htmlFor='check' className='custom-input-label ms-2'>Remember me</label>
+                    <input type='checkbox' className='custom-control custom-checkbox' id='check' onClick={() => setshowp(showp => !showp)}/>
+                    <label htmlFor='check' className='custom-input-label ms-2'>Show Password</label>
                 </div>
 
                 <div className='d-grid'>
                     <button className='btn btn-primary'>Sign IN</button>
                 </div>
-
-                <p className='text-end mt-2'>
-                     <a href=''>Forgot Password?</a> 
-                </p>
                   </form>
             </div>
         </div>

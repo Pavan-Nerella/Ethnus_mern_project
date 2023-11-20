@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 import './Body.css'
 import axios from 'axios';
 import Footer from '../Footer'
+import FAQ from '../FAQ/faqhome'
 
 class DoctorHome extends Component {
   //sending token information and bringing user details.
@@ -23,6 +24,7 @@ class DoctorHome extends Component {
         <img src ="/images/hero-img01.png" alt ="my_imag" height="100%" width="200px"/>
         </div>
     </div>
+    <FAQ />
         <Footer />
         </div>
       )

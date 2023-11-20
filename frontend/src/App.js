@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Home from "./Components/pages/Home";
-
 import Appointment from "./Components/pages/appointment";
 import AboutUs from "./Components/pages/AboutUs";
 import Reports from "./Components/pages/Reports";

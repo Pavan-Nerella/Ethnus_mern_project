@@ -18,13 +18,12 @@ export default function Navigation(props) {
         data-bs-theme={props.modeValue ? "dark" : "light"}
         sticky="top"
       >
-      <Navbar.Brand as={Link} to={'/userHome'} >
+      <Navbar.Brand as={Link} to={'/adminHome'} >
             <img src = "../images/logo.png" style={{width:"80px",height:"80px",marginLeft:"20px"}} alt="logo" />
           </Navbar.Brand> 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link as={Link} to= {''} >Approve Doctor</Nav.Link>
               <Nav.Link as={Link} to={'/allusers'}>Users</Nav.Link>
               <Nav.Link as={Link} to={'/alldoctors'}>Doctors</Nav.Link>
               <Nav.Link as={Link} to={'/feedback'}>View Feedbacks</Nav.Link>
@@ -35,7 +34,7 @@ export default function Navigation(props) {
             <Nav>
               <Nav.Link ><i class="fa-solid fa-bell"></i></Nav.Link>
               <Nav.Link as={Link} to={'/userProfile'}><i class="fa-solid fa-user"></i> {localStorage.getItem("adminname")}</Nav.Link>
-              <Nav.Link  onClick={handleLogout}>Logout</Nav.Link>
+              <Nav.Link  onClick={handleLogout} as={Link} to={'/alogin'}>Logout</Nav.Link>
               <Form inline>
                 <Button type="submit" onClick={props.updateMode}>
                   {props.modeValue ? "Light" : "Dark"}
