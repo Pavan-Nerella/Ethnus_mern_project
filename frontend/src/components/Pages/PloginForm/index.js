@@ -1,6 +1,7 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 // import './user.css'
 import '../../styles/user.css'
+
 import { Link,useNavigate} from 'react-router-dom'
 import axios from 'axios'
 
@@ -9,6 +10,7 @@ function Login() {
 
   const [login, setLogin] = useState({ email: "", password: "" });
   const [error,seterr] = useState("");
+  const[showp,setshowp] = useState(false)
   function updateLogin(event) {
     const { name, value } = event.target;
     setLogin((prevValue) => {
@@ -46,27 +48,28 @@ function Login() {
             <div className='form_container_signin p-5 rounded '>
                 <form onSubmit={submitForm}>
                 <h3 className='text-center'>Sign in</h3>
-                
+
                 <div className='mb-2'>
                     <label htmlFor='email'>Email</label>
                     <input type='email' placeholder='Enter UserID' className='form-control' value={login.email} onChange={updateLogin} name="email"/>
                 </div>
                 <div className='mb-2'>
-                    <label htmlFor='password'>password</label>
-                    <input type='password' placeholder='Enter Password' className='form-control' value={login.password} onChange={updateLogin} name="password"/>
+                    <label htmlFor='password'>password</label>{
+                      showp ?  <input type='text' placeholder='Enter Password' className='form-control' value={login.password} onChange={updateLogin} name="password"/> :
+                      <input type='password' placeholder='Enter Password' className='form-control' value={login.password} onChange={updateLogin} name="password"/>
+                    }
+                    
                 </div>
                 <div className='mb-2'>
-                    <input type='checkbox' className='custom-control custom-checkbox' id='check'/>
-                    <label htmlFor='check' className='custom-input-label ms-2'>Remember me</label>
+                    <input type='checkbox' className='custom-control custom-checkbox' id='check' onClick={() => setshowp(showp => !showp)}/>
+                    <label htmlFor='check' className='custom-input-label ms-2'>Show Password</label>
                 </div>
+
+            
 
                 <div className='d-grid'>
                     <button className='btn btn-primary'>Sign IN</button>
                 </div>
-
-                <p className='text-end mt-2'>
-                     <a href=''>Forgot Password?</a> <Link to='/psignup' className='ms-2'>Sign Up</Link>
-                </p>
                   </form>
                   <p style={{color :"red"}}> {error}</p>
             </div>
