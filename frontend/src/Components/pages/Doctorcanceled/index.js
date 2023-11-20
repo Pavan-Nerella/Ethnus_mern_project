@@ -1,9 +1,8 @@
 import {Component} from "react"
+
 import Doctorusermini from "../Doctorusermini"
 
-import "./index.css"
-
-class Doctorusermain extends Component{
+class Doctorcanceled extends Component{
     state = {
         data : []
     }
@@ -13,7 +12,7 @@ class Doctorusermain extends Component{
      console.log(data)
      const email = localStorage.getItem("demail");
      const newdata = data.filter((doc) =>(
-        doc.demail === email && !doc.doctorapproved &&!doc.iscancel
+        doc.demail === email  && doc.iscancel
      ))
      this.setState({
         data : newdata
@@ -24,10 +23,10 @@ class Doctorusermain extends Component{
     }
     render(){
         const {data} = this.state;
-         const iscancel = false;
+       const iscancel = true;
         return(
             <div style={{paddingTop:"40px",paddingLeft:"70px" ,backgroundImage:"url(./images/noappointmentbg.png)",backgroundPosition:"center",backgroundSize:"cover",paddingRight:"200px"}}>
-                <h1 style={{textAlign:"center",fontFamily:"Roboto",color:"red",fontWeight:"bold"}}> Your Pending Appointments</h1>
+                <h1 style={{textAlign:"center",fontFamily:"Roboto",color:"red",fontWeight:"bold"}}> Your Canceled Appointments</h1>
                 { 
                 data.length === 0 ?  
                 <div style={{display:"flex",justifyContent:"center",height:"100%",width:"100%"}}>
@@ -35,7 +34,7 @@ class Doctorusermain extends Component{
                     </div>
                  :
                     data.map((doc) =>(
-                        <Doctorusermini  doc = {doc} iscancel={iscancel}/>
+                        <Doctorusermini  doc = {doc} iscancel ={iscancel} />
                     )) 
                 }
               
@@ -44,4 +43,4 @@ class Doctorusermain extends Component{
     }
 }
 
-export default Doctorusermain
+export default Doctorcanceled

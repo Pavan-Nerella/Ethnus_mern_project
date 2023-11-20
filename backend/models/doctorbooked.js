@@ -11,7 +11,10 @@ const doctorbookedSchema = mongoose.Schema({
     specality : {type:String},
     status : {type:String},
     doctorapproved : {type:Boolean},
-    napprovedreason : {type : String}
+    napprovedreason : {type : String},
+    iscancel :{type:Boolean},
+    doctorFees:{type:String},
+    Paymet :{type : String}
 },
 {
     collection: "Doctorbook",

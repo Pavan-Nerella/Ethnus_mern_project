@@ -22,8 +22,7 @@ class Doctorapprovemini extends Component{
     })
   }
     render(){
-        const {doc} = this.props;
-        const {iscancel} = this.state;
+        const {doc} = this.props
         return(
     <div style={{padding:"25px"}}>
       <Table bordered hover  striped="columns" variant={this.props.modeOut?"dark":"light"} >
@@ -54,7 +53,10 @@ class Doctorapprovemini extends Component{
                   <td> time:</td>
                   <td style={{fontWeight:"bold"}}> {doc.bookedtime}</td>
                 </tr>
-
+                <tr>
+                  <td> Your Fee:</td>
+                  <td style={{fontWeight:"bold"}}> {doc.doctorFees} Rs</td>
+                </tr>
                 <tr>
                   <td> diease description:</td>
                   <td style={{fontWeight:"bold"}}> {doc.diease}</td>

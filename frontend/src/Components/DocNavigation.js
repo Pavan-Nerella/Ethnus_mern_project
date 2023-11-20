@@ -25,6 +25,7 @@ function DocNavigation(props) {
             <Nav className="me-auto">
               <Nav.Link as={Link} to={'/doctoruser'}>Pending appointments</Nav.Link>
               <Nav.Link as={Link} to={'/approved'}>Approved appointments</Nav.Link>
+              <Nav.Link as={Link} to={'/cancel'}>Canceled appointments</Nav.Link>
               <Nav.Link as={Link} >Profile</Nav.Link>
             </Nav>
           </Navbar.Collapse>

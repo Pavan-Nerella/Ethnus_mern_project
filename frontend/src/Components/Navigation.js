@@ -27,6 +27,7 @@ export default function Navigation(props) {
             <Nav className="me-auto">
               <Nav.Link as={Link} to= {'/Booking'}>Book oppointment</Nav.Link>
               <Nav.Link as={Link} to={'/pappointtment'}>Your appointments</Nav.Link>
+              <Nav.Link as={Link} to={'/pay2'}> Doctor Aprroved appointments</Nav.Link>
               <Nav.Link as={Link} to={'/About'}>About us</Nav.Link>
             </Nav>
   

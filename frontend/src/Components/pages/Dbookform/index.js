@@ -54,9 +54,10 @@ class Dbookform extends Component{
         diease : this.state.diease,
         pname : data.Data.fname,
         pemail,
-        status :"Pending ..",
+        status :"Pending..",
         doctorapproved : false,
-        napprovedreason : ""
+        napprovedreason : "",
+        Payment :"Not done"
       }
       const url = "http://localhost:5003/book/doctorbooked";
     axios.post(url,obj).then((res) =>{
@@ -84,7 +85,7 @@ class Dbookform extends Component{
     const {isclicked,bookeddate} = this.state;
     return(
         <div>
-            <div className="formbold-main-wrapper" style={{backgroundImage:"url(./images/bg.jpg)",backgroundPosition:"center",backgroundSize:"cover"}}>
+            <div className="formbold-main-wrapper" style={{backgroundImage:"url(./images/doctorusermain.jpg)",backdropFilter:"blur(2px)",backgroundSize:"cover"}}>
   <div className="formbold-form-wrapper">
     {
      isclicked ? (
@@ -93,7 +94,7 @@ class Dbookform extends Component{
         <h1 style={{color:"red",fontFamily:"Roboto",fontWeight:"bold"}}> Your appointment is Under review</h1>
         </div>
      ) : (
-      <form onSubmit={this.clicked} style={{padding:"20px",borderRadius:"20px"}}>
+      <form onSubmit={this.clicked} style={{padding:"20px",borderRadius:"20px",border:"2px solid orange"}}>
       <div className="formbold-mb-5">
         <label forHtml="name" className="formbold-form-label" style={{color:"red",fontWeight:"bold"}}> Doctor Name </label>
         <input
@@ -156,7 +157,7 @@ class Dbookform extends Component{
       </div>
       <div className="formbold-mb-5">
         <label for="phone" className="formbold-form-label" style={{color:"red",fontWeight:"bold"}}> More detail about diease <span style={{color:"red"}}> *</span></label>
-        <textarea rows ="5" cols="50"  onChange={(event) =>(this.setState({diease : event.target.value}))} style={{color:"white"}} required/>
+        <textarea rows ="5" cols="50"  onChange={(event) =>(this.setState({diease : event.target.value}))} style={{color:"black"}} required/>
       </div>
       
       <div>

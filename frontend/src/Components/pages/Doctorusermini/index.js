@@ -8,8 +8,8 @@ import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 class Doctorusermini extends Component{
   state = {
-    iscancel : false,
-    naprrove : ""
+    naprrove : "",
+    fee :""
   }
   cancel = () =>{
     console.log("hi")
@@ -17,10 +17,11 @@ class Doctorusermini extends Component{
       ispopup : true
     })
   }
+
   submit = (event) =>{
     const {doc} = this.props;
     const {naprrove} = this.state;
-    const obj = {napprovedreason : naprrove,status : "Not Approved"}
+    const obj = {napprovedreason : naprrove,status : "Not Approved",iscancel:true}
     const url = "http://localhost:5003/book/update-doctorbooked/" + doc._id;
     axios
       .put(url, obj)
@@ -34,31 +35,52 @@ class Doctorusermini extends Component{
         console.log(err);
       });
       event.preventDefault()
-    this.setState({
-      iscancel : true
-    })
+      window.location.reload()
   }
-  booked = () =>{
+  deleted = async () =>{
     const {doc} = this.props;
-    const obj = {doctorapproved : true,status : "Doctor approved"}
-    const url = "http://localhost:5003/book/update-doctorbooked/" + doc._id;
-    axios
-      .put(url, obj)
+    console.log(doc)
+    let url = "http://localhost:5003/book/delete-doctorbooked/";
+   const response =   axios
+      .delete(url + doc._id)
       .then((res) => {
-       console.log(res)
-        if (res.status === 200) {
-          alert("doctor updated");
+        console.log(res)
+        if (res.status === 204) {
+          window.location.reload();
         } 
       })
       .catch((err) => {
         console.log(err);
       });
-
-      window.location.reload();
+   }  
+  booked = (event) =>{
+    event.preventDefault();
+    const {fee} = this.state
+    const {doc} = this.props;
+    if(fee === ""){
+        alert("Enter the Your fee");
+    }
+    else{
+      const obj = {doctorapproved : true,status : "Doctor approved",doctorFees : fee}
+      const url = "http://localhost:5003/book/update-doctorbooked/" + doc._id;
+      axios
+        .put(url, obj)
+        .then((res) => {
+         console.log(res)
+          if (res.status === 200) {
+            alert("doctor updated");
+          } 
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  
+        window.location.reload();
+    }
+   
   }
     render(){
-        const {doc} = this.props;
-        const {iscancel} = this.state;
+        const {doc,iscancel} = this.props;
         return(
     <div style={{padding:"25px"}}>
       <Table bordered hover  striped="columns" variant={this.props.modeOut?"dark":"light"} >
@@ -99,8 +121,8 @@ class Doctorusermini extends Component{
                      iscancel && 
                      <tr>
                       <td> 
-                     <Button type="submit"   style={{marginTop:"20px",backgroundColor:"red",border:"0px",color:"white",display:"flex",alignItems:"center",width:"200px",justifyContent:"space-between"}}>
-                          X Cancel appointment</Button>
+                     <Button  style={{marginTop:"20px",backgroundColor:"red",border:"0px",color:"white",display:"flex",alignItems:"center",width:"200px",justifyContent:"space-between"}} onClick={this.deleted}>
+                          X Delete appointment</Button>
                      </td> 
                       </tr> 
                   }
@@ -131,8 +153,29 @@ class Doctorusermini extends Component{
    </Popup>
          </td>
                   <td colSpan={2}>
-                    <Button type="submit"   style={{marginTop:"20px",backgroundColor:"blue",border:"0px",color:"white",display:"flex",alignItems:"center",width:"200px",justifyContent:"space-between"}} onClick = {this.booked}>
-                        {<img src="./images/tick.png" style={{width:"30px"}}/>} Approve appointment</Button>
+                  <Popup
+     modal
+     trigger={
+      <Button type="submit"   style={{marginTop:"20px",backgroundColor:"blue",border:"0px",color:"white",display:"flex",alignItems:"center",width:"200px",justifyContent:"space-between"}}>
+      {<img src="./images/tick.png" style={{width:"30px"}}/>} Approve appointment</Button>
+     }
+   >
+     {close => (
+       <>
+         <div>
+          <form style={{display:"flex",flexDirection:'column'}} onSubmit={this.booked}>
+              <label style={{color:"red"}}> Your Fee ?</label>
+              <input  placeholder="Enter the Your fee" style={{marginTop:"10px",padding:"10px"}} onChange={(event) =>this.setState({
+                fee: event.target.value 
+              })}  required/>
+                <Button type="submit"   style={{marginTop:"20px",backgroundColor:"blue",border:"0px",color:"white",display:"flex",alignItems:"center",width:"200px",justifyContent:"space-between"}} onClick = {this.booked}>
+              {<img src="./images/tick.png" style={{width:"30px"}}/>} Approve appointment</Button>
+           </form>
+         </div>
+       </>
+     )}
+   </Popup>
+                  
                   </td>
                   </tr>
                  }
