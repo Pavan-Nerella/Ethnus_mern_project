@@ -1,9 +1,10 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios';
 import '../styles/table.css'
+import AdminNav from './AdminNav'
 
 
-function Doctors() {
+function Doctors(props) {
   const [doctor,setDoctor] = useState([]);
 
   useEffect(()=>{
@@ -13,6 +14,8 @@ function Doctors() {
   },[])
   return (
     <div>
+    <AdminNav updateMode={props.update} modeValue={props.modeValue}  Data={props.Data}/>
+    <div className="table-body">
       <table class=" table atable">
       <thead>
         <tr>
@@ -29,7 +32,7 @@ function Doctors() {
                     <td>{doc.name}</td>
                     <td>{doc.email}</td>
                     <td>
-                  <button onClick={() =>{
+                  <button style={{backgroundColor:"red",color:"white",borderRadius:"7px"}} onClick={() =>{
                         let url = "http://localhost:5003/doctors/delete-doctor/";
                         const response =   axios
                            .delete(url + doc._id)
@@ -52,6 +55,7 @@ function Doctors() {
         }
       </tbody>
     </table>
+    </div>
     </div>
   )
 }

@@ -108,7 +108,7 @@ function App() {
           }/>
           <Route path="/userHome" element={
             <ProtectedRoutes>
-              <Home update={handleMode} modeValue={mode} handleData={getUser} Data={data} />
+               <Home update={handleMode} modeValue={mode} handleData={getUser} Data={data} />
             </ProtectedRoutes>
           } />
           <Route path="/Booking" element={<Appointment update={handleMode} modeValue={mode} Data={data} />} />

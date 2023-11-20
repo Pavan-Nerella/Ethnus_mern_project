@@ -42,7 +42,7 @@ const feedbackCtrl = async(req,res) =>{
         res.status(500).json({success:false,message:`Register Controller ${error.message}`})
     }
 }
-const loginController = async(req,res) =>{
+const loginController = async (req,res) =>{
     try{
         const user = await adminModel.findOne({email:req.body.email})
         if(!user){

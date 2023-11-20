@@ -8,7 +8,7 @@ function Login() {
   const navigate = useNavigate()
 
   const [login, setLogin] = useState({ email: "", password: "" });
-  const[showp,setshowp] = useState(false)
+  const[showp,setshowp] = useState(false);
   function updateLogin(event) {
     const { name, value } = event.target;
     setLogin((prevValue) => {
