@@ -35,7 +35,7 @@ export default function Navigation(props) {
             <Nav>
               <Nav.Link ><i class="fa-solid fa-bell"></i></Nav.Link>
               <Nav.Link as={Link} to={'/userProfile'}><i class="fa-solid fa-user"></i> {localStorage.getItem("adminname")}</Nav.Link>
-              <Nav.Link  onClick={handleLogout}>Logout</Nav.Link>
+              <Nav.Link  onClick={handleLogout} as={Link} to={'/alogin'}>Logout</Nav.Link>
               <Form inline>
                 <Button type="submit" onClick={props.updateMode}>
                   {props.modeValue ? "Light" : "Dark"}

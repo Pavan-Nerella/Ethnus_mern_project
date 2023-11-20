@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
  }
   booked = () =>{
     const {doctor} = this.props;
+    console.log(doctor)
      this.props.doctorBook(doctor._id);
   }
   render(){
@@ -24,7 +25,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
           </tr>
           <tr>
             <td style={{width:"20%"}}>
-            <img src='https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg' alt='doctor' style={{height:'150px',width:'150px'}}/>
+            <img src={doctor.image} alt='doctor' style={{height:'150px',width:'150px'}}/>
             </td>
             <td>
               <Table hover variant={this.props.modeOut?"dark":"light"}>
