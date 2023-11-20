@@ -25,8 +25,11 @@ import Alldoctors from "./Components/admin/Doctors"
 import AdminPR from "./Components/admin/PublicRouteAdmin"
 import AdminProtR from "./Components/admin/ProtectedadminRoute";
 import Doctoruser from "./Components/pages/Doctoruser";
+import Cancelapt from "./Components/pages/Cancelapt";
 import ProtectedDocRoute from "./Components/ProtectedDocRoute";
 import PublicDocRoutes from "./Components/publicDocroute";
+
+import Ppayappointment from "./Components/pages/Ppayappointment";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -176,6 +179,16 @@ function App() {
             <Route path="/approved" element={ 
               <ProtectedDocRoute>
                 <Approvedapt handleData={getDoc} Data={docdata} update={handleMode} modeValue={mode}/>
+              </ProtectedDocRoute>
+             
+          } />
+           <Route path="/pay2" element={ 
+                <Ppayappointment handleData={getDoc} Data={docdata} update={handleMode} modeValue={mode}/>
+             
+          } />
+           <Route path="/cancel" element={ 
+              <ProtectedDocRoute>
+                <Cancelapt handleData={getDoc} Data={docdata} update={handleMode} modeValue={mode}/>
               </ProtectedDocRoute>
              
           } />

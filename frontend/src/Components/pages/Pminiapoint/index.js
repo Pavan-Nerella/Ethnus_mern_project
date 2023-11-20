@@ -21,8 +21,37 @@ class Pminiapoint extends Component{
         console.log(err);
       });
    }
+   payed = () =>{
+    const {doc,isapproved} = this.props;
+     
+    if(isapproved){
+      this.props.payment(doc._id)
+    } 
+
+    
+  
+  
+   }
+
+   approved = () =>{
+    const {doc,isapproved} = this.props;
+    if(isapproved){
+      if( doc.Paymet === undefined){
+        return(
+          <tr>
+            <td colSpan={2}>
+    <Button type="submit"   style={{marginTop:"20px",backgroundColor:"red",border:"0px",color:"white"}} onClick = {this.payed}> Pay Now</Button>
+  </td>
+          </tr>
+        )
+      }
+    }
+    else{
+      return "";
+    }
+  }
     render(){
-        const {doc} = this.props;
+        const {doc,isapproved} = this.props;
         return(
     <div style={{padding:"25px"}}>
       <Table bordered hover  striped="columns" variant={this.props.modeOut?"dark":"light"}  >
@@ -57,6 +86,7 @@ class Pminiapoint extends Component{
                   <td> time:</td>
                   <td style={{fontWeight:"bold"}}> {doc.bookedtime}</td>
                 </tr>
+
                 <tr>
                     <td> Status :
                     </td>
@@ -65,7 +95,20 @@ class Pminiapoint extends Component{
                       :   <td style={{color:"red",fontWeight:"bold"}}> {doc.status}</td>
                     }
                    
-                </tr>        
+                </tr> 
+                { 
+                doc.Paymet === undefined ?
+                <tr>
+                <td> Payment</td>
+                 <td style={{color:"red",fontWeight:"bold"}}> Not done</td>
+               </tr> :
+                  <tr>
+                   <td> Payment</td>
+                    <td style={{color:"green",fontWeight:"bold"}}>Payment done</td>
+                  </tr>
+                    
+            
+                }       
                 {
                       doc.napprovedreason !== "" && 
                       <tr>
@@ -73,12 +116,24 @@ class Pminiapoint extends Component{
                       <td style={{color:"red",fontWeight:"bold"}}> {doc.napprovedreason}</td> </tr>
                      
                     }
-                  
-                <tr>
-                <td colSpan={2}>
+                  {
+                      !doc.doctorapproved &&
+                    <tr>
+                    <td colSpan={2}>
                     <Button type="submit"   style={{marginTop:"20px",backgroundColor:"red",border:"0px",color:"white"}} onClick = {this.canceled}> X Cancel appointment</Button>
                   </td>
-                </tr>
+                      </tr>  
+                  } 
+                  {
+                   isapproved &&
+                   <tr>
+                   <td> Doctor Fees:</td>
+                   <td style={{fontWeight:"bold"}}> {doc.doctorFees}</td>
+                 </tr> 
+                  }
+                  {
+                    this.approved()
+                  } 
               </Table>
             </td>
           </tr>

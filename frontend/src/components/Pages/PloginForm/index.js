@@ -64,14 +64,16 @@ function Login() {
                     <input type='checkbox' className='custom-control custom-checkbox' id='check' onClick={() => setshowp(showp => !showp)}/>
                     <label htmlFor='check' className='custom-input-label ms-2'>Show Password</label>
                 </div>
-
-            
-
                 <div className='d-grid'>
                     <button className='btn btn-primary'>Sign IN</button>
+                    <Link to="/psignup">
+                  <p style={{textDecoration:"underline",color:"blue"}}>
+                     Signup</p>
+                </Link>
                 </div>
                   </form>
                   <p style={{color :"red"}}> {error}</p>
+                
             </div>
         </div>
     )
