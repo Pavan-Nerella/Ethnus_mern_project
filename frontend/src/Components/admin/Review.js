@@ -1,8 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios';
 import '../styles/table.css'
+import AdminNav from './AdminNav'
 
-function Review() {
+function Review(props) {
   const [feedback,setFeedback] = useState([]);
 
    useEffect(()=>{
@@ -12,6 +13,7 @@ function Review() {
    },[])
   return (
     <div>
+    <AdminNav updateMode={props.update} modeValue={props.modeValue}  Data={props.Data}/>
       <table class="table atable">
       <thead>
         <tr>

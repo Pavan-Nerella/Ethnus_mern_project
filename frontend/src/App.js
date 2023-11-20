@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Home from "./Components/pages/Home";
+
 import Appointment from "./Components/pages/appointment";
 import AboutUs from "./Components/pages/AboutUs";
 import Reports from "./Components/pages/Reports";
@@ -105,7 +106,7 @@ function App() {
           }/>
           <Route path="/userHome" element={
             <ProtectedRoutes>
-              <Home update={handleMode} modeValue={mode} handleData={getUser} Data={data} />
+               <Home update={handleMode} modeValue={mode} handleData={getUser} Data={data} />
             </ProtectedRoutes>
           } />
           <Route path="/Booking" element={<Appointment update={handleMode} modeValue={mode} Data={data} />} />
